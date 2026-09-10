@@ -97,6 +97,7 @@ Executa `unittest` em `tests/` (conectores, replicação, protocolo Gertec).
 
 ## Documentação adicional
 
+- `docs/ROADMAP.md`: fases concluídas, refatoração pendente e preparação para Windows Server
 - `docs/ESTRUTURA_E_FUNCOES.md`, `docs/FLUXO_DE_DESENVOLVIMENTO.md`, `docs/PROJETO_PRINCIPAL.md`
 - `deploy/README_CLOUD.md` para execução em nuvem (opcional)
 - `docs/historico/` relatórios de versões anteriores
