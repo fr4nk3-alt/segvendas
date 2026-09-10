@@ -1,0 +1,65 @@
+/* SEG Vendas 5.9.8 — movimento calmo e três tamanhos para o NestorX */
+
+/* O deslocamento entre pontos continua funcionando, mas a animação curta de
+   passos foi retirada: era ela que fazia o personagem parecer tremendo. */
+.nestorx-mover.is-walking .nestorx-picture {
+  animation: none !important;
+  transform: none;
+}
+
+.nestorx-mover.nestorx-size-small { --nestorx-width: 60px; --nestorx-height: 172px; }
+.nestorx-mover.nestorx-size-medium { --nestorx-width: 76px; --nestorx-height: 218px; }
+.nestorx-mover.nestorx-size-large { --nestorx-width: 94px; --nestorx-height: 270px; }
+
+.nestorx-size-control {
+  margin-top: 9px;
+  padding-top: 8px;
+  border-top: 1px solid #e1ebe5;
+}
+.nestorx-size-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #52675b;
+  font-size: 10px;
+  font-weight: 850;
+}
+.nestorx-size-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.nestorx-size-option {
+  min-height: 32px;
+  padding: 5px 4px;
+  border: 1px solid #c9ded2;
+  border-radius: 9px;
+  background: #eff7f3;
+  color: #075c36;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.nestorx-size-option:hover { background: #e0f1e8; }
+.nestorx-size-option[aria-pressed="true"] {
+  border-color: #07824b;
+  background: #07824b;
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(0, 106, 59, .18);
+}
+
+@media (max-width: 650px) {
+  .nestorx-mover.nestorx-size-small { --nestorx-width: 38px; --nestorx-height: 108px; }
+  .nestorx-mover.nestorx-size-medium { --nestorx-width: 44px; --nestorx-height: 126px; }
+  .nestorx-mover.nestorx-size-large { --nestorx-width: 54px; --nestorx-height: 154px; }
+}
+
+@media (max-height: 520px) {
+  .nestorx-mover.nestorx-size-small { --nestorx-width: 30px; --nestorx-height: 86px; }
+  .nestorx-mover.nestorx-size-medium { --nestorx-width: 32px; --nestorx-height: 92px; }
+  .nestorx-mover.nestorx-size-large { --nestorx-width: 40px; --nestorx-height: 116px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nestorx-mover.is-walking .nestorx-picture { animation: none !important; }
+}

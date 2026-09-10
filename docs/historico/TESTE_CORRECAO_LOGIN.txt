@@ -1,0 +1,13 @@
+TESTE DA CORREÇÃO — SEG VENDAS 5.4.2
+
+[OK] O servidor abre uma URL exclusiva com ?v=5.4.2&fresh=...
+[OK] A página inicial contém a tela “Acesso ao sistema”.
+[OK] O navegador recebe Cache-Control: no-store.
+[OK] O aplicativo remove caches e service workers antigos.
+[OK] A versão local não registra novamente o service worker.
+[OK] Login do código 15 com a senha inicial SEG@15 validado.
+[OK] Senha incorreta rejeitada.
+[OK] Após login, a tela “Onde você quer ir hoje?” é exibida.
+
+IMPORTANTE
+Abra sempre por iniciar_app.bat. Não abra index.html diretamente.

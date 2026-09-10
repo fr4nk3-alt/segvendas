@@ -1,0 +1,22 @@
+PESQUISA LOCAL POR CÂMERA E FOTO
+================================
+
+Componente: @zxing/browser 0.2.1
+Projeto: https://github.com/zxing-js/browser
+Licença: MIT (consulte LICENSE-zxing-browser.txt)
+SHA-256 do pacote oficial browser-0.2.1.tgz:
+21F5C8B9CC9CA4E6897E9374C072A32D39A88D51F8561A040A5054ADE81BE215
+
+O invólucro UMD recebeu uma alteração de compatibilidade de uma linha para
+priorizar o objeto window nos navegadores. O algoritmo de leitura não foi
+alterado. SHA-256 do arquivo local final:
+2CF865BDD51FBB78012E26050FF35DEA2D29BE925C67262B4BB369016A20FBEB
+
+O arquivo UMD inclui o leitor @zxing/library 0.23.0.
+Projeto: https://github.com/zxing-js/library
+Licença: Apache-2.0 (consulte LICENSE-zxing-library.txt)
+SHA-256 do pacote oficial library-0.23.0.tgz:
+E49F1076D9AF70179C9FBB5026CDA67E48864F3BCED64FFF548237208CC2FF32
+
+As fotos escolhidas pelo usuário são lidas somente no navegador. O aplicativo
+não envia nem grava a imagem usada para a pesquisa.

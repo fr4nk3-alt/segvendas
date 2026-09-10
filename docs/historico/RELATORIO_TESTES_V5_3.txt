@@ -1,0 +1,28 @@
+RELATÓRIO DE TESTES — SEG VENDAS 5.3 PREMIUM
+================================================
+Data: 31/07/2026
+
+TESTES APROVADOS
+[OK] servidor.py compilado sem erros de sintaxe.
+[OK] app.js validado pelo Node.js sem erros de sintaxe.
+[OK] tela de login aparece antes do menu principal.
+[OK] campo de senha obrigatório presente.
+[OK] menu “Onde você quer ir hoje?” inicia oculto.
+[OK] vendedor autenticado por código e senha padrão.
+[OK] cliente autenticado com perfil Cliente.
+[OK] cliente bloqueado na API de pesquisa de clientes.
+[OK] cliente recebe somente manuais públicos.
+[OK] perfil Cliente limitado às páginas Catálogo e Manuais/Suporte.
+[OK] Fórum bloqueado para Cliente.
+[OK] troca da própria senha validada pela API.
+[OK] senha incorreta rejeitada.
+[OK] todos os usuários possuem senha armazenada como hash e salt.
+[OK] o cadastro não contém senhas em texto aberto.
+
+VALIDAÇÃO MANUAL RECOMENDADA NO WINDOWS
+- Conferir visualmente a tela em computador e celular.
+- Confirmar instalação como PWA.
+- Confirmar acesso simultâneo na rede da loja.
+- Testar impressão e compartilhamento.
+
+Resultado técnico: aprovado para teste interno.

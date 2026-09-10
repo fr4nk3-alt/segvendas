@@ -1,0 +1,2 @@
+Esta pasta recebe automaticamente os PDFs cadastrados pelo botão “Cadastrar manual”.
+Não é necessário copiar arquivos manualmente.

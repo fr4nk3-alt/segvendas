@@ -1,0 +1,227 @@
+SEG VENDAS 5.9.13 PREMIUM — PROJETO PRINCIPAL
+
+NOVIDADES PRINCIPAIS
+- A cesta do orçamento agora aparece em um pensamento discreto que acompanha o mascote escolhido.
+- O pensamento mostra produtos, quantidades e subtotal e permite aumentar, diminuir ou remover itens.
+- A pesquisa de produtos é paginada: mostra 8 linhas por padrão e permite escolher 8, 16, 24, 32, 40 ou 50 linhas por página.
+- A busca inteligente reconhece abreviações, sinônimos e erros comuns de digitação (por exemplo, “deslisantes” e “dz”).
+- Os resultados podem ser filtrados por categoria, e cada produto exibe sua categoria sugerida.
+- Administradores podem criar categorias e alterar a categoria de qualquer produto na área Ajustes.
+- O botão “Ocultar resultados” recolhe a lista sem apagar o que foi pesquisado.
+- A busca aguarda uma pausa curta na digitação antes de atualizar, reduzindo trabalho desnecessário.
+- IP de escuta, porta interna e URL pública/DDNS agora podem ser configurados.
+- O pacote ganhou CONFIGURAR_REDE_BETA.bat e um atalho próprio na instalação.
+- A porta configurada é fixa: se estiver ocupada, o aplicativo informa o erro em vez de mudar silenciosamente.
+- O domínio público configurado passa a ser aceito pela proteção de Host do servidor.
+- A configuração fica dentro de data e é preservada quando o aplicativo é atualizado.
+- Há modos prontos para túnel HTTPS, DDNS direto, rede local e configuração avançada.
+- Coordenadores acompanham o histórico e os resultados dos vendedores da própria loja.
+- Administradores configuram e testam Dataplace ou outra API sem expor a credencial no navegador.
+- Vendas confirmadas agora são separadas de orçamentos e entregas.
+- O botão “Adicionar selo” aparece em cada produto do orçamento e seu uso é facultativo.
+- A quantidade do produto define o número de campos: 10 unidades geram 10 campos de selo.
+- Selos preenchidos são preservados no histórico, no orçamento e na entrega.
+- Ao reutilizar um pedido, os selos antigos são removidos para não repetir etiquetas físicas já usadas.
+- Novos clientes ausentes da base aguardam aprovação de um administrador.
+- Pedidos salvos ficam preservados no servidor e possuem o botão “Reutilizar”.
+- O Histórico ganhou a área “Pedidos modelos”; vendedores e coordenadores criam e reutilizam,
+  mas somente administradores podem excluir um modelo.
+- O cadastro de foto do produto ganhou “Tirar foto” e “Escolher do álbum”.
+- Cada usuário pode adicionar, trocar ou remover sua própria foto de perfil.
+- O avatar inteiro é clicável e não há mais uma lâmpada ao lado dele.
+- A aba Assistente agora conversa sobre temas técnicos, faz perguntas de diagnóstico,
+  mostra curiosidades automáticas e pesquisa produtos apenas quando isso for solicitado.
+- A janela de ajuda do avatar ganhou o botão “Curiosidade técnica”.
+- O login ganhou “Esqueci minha senha” para enviar um pedido ao servidor local.
+- Os orçamentos usam numeração por filial: Matriz `MA00001`, Oeste `OE00001`,
+  São Cristóvão `SC00001` e Lagos `LA00001`. A sequência continua no modo offline.
+- O histórico antigo apenas numérico é convertido para o padrão automaticamente;
+  o número anterior fica guardado internamente para conferência.
+- Ao clicar no avatar, a janela agora permite escolher entre NestorX, SEGuito e Pretinha.
+- Pretinha é uma cachorrinha preta em estilo 3D, de corpo inteiro e com fundo transparente.
+- O mascote escolhido se movimenta pelas bordas e usa os mesmos recursos de ajuda.
+- A preferência fica salva separadamente em cada computador, celular ou navegador.
+
+RECUPERAÇÃO PELO SERVIDOR LOCAL
+1. O funcionário clica em “Esqueci minha senha” e informa o código ou usuário.
+2. O servidor registra o pedido sem receber ou exibir senha.
+3. Um administrador abre Ajustes e autoriza a restauração.
+4. A senha volta ao padrão SEG@CÓDIGO. A troca obrigatória está desativada nesta versão.
+
+Em uma futura publicação pela internet, a confirmação poderá ser enviada por e-mail ou WhatsApp,
+sempre usando HTTPS e um link temporário de uso único.
+- Clientes bloqueados aparecem em vermelho, com o selo BLOQUEADO, tanto na página Clientes
+  quanto na pesquisa rápida do orçamento, e não podem ser selecionados.
+- Coordenadores e administradores podem marcar produtos como ativos ou inativos na janela da foto.
+- Produtos inativos aparecem em vermelho/cinza, com preço riscado e botão desativado.
+- Um produto inativo não pode ser acrescentado nem permanecer em um orçamento a ser finalizado.
+- A área de Orçamento ganhou o botão “Modelos de orçamento”.
+- Vendedores, coordenadores e administradores podem salvar e reaproveitar listas prontas.
+- Os modelos são compartilhados pela equipe, usam os preços atuais e não armazenam dados do cliente.
+- O SEGuito faz duas piscadas rápidas, aguarda 0,5 segundo e faz uma piscada curta,
+  repetindo o ciclo a cada 2 segundos.
+- O fórum agora permite publicar como Instalador, Cliente, Colaborador SEG, Vendedor SEG,
+  Coordenador SEG, Suporte técnico SEG, Financeiro SEG, Técnico/integrador,
+  Revendedor/parceiro ou Outro.
+- O perfil escolhido aparece nas dúvidas e nas respostas.
+- O selo Oficial SEG continua separado e disponível somente para coordenadores e administradores.
+- Respostas oficiais usam o nome da pessoa autenticada no sistema.
+- O pacote ganhou o arquivo INSTALAR_SEG_VENDAS.bat.
+- O instalador cria atalhos na Área de Trabalho e no menu Iniciar.
+- A instalação abre o sistema em uma janela com aparência de aplicativo, quando Edge ou Chrome estão disponíveis.
+- O Python necessário já acompanha o pacote; não é preciso instalá-lo separadamente.
+- Ao atualizar uma instalação existente, clientes, usuários, fotos e manuais são protegidos e restaurados.
+- O SEGuito original voltou às telas de acesso e “Onde você quer ir hoje?”.
+- Ao abrir uma área de trabalho, o SEGuito sai de cena e o NestorX móvel assume a ajuda.
+- O novo NestorX aparece de corpo inteiro e se movimenta pelas bordas da tela.
+- Ele usa polo branca com a logo SEG, jeans preto e sapatênis marrom-escuro, com cabelo liso penteado para o lado.
+- O personagem evita campos, botões, menus e janelas sempre que encontra uma posição livre.
+- O avatar abre dicas e também permite arrastar o NestorX para outra posição.
+- Ao clicar no avatar, o NestorX pergunta "Como posso ajudar?" e aguarda a pessoa escrever.
+- A resposta direciona para orçamento, produtos, clientes, manuais, entrega, histórico, ajustes ou segurança.
+- Pausar/retomar e ocultar aparecem como ícones discretos.
+- As preferências de pausa e ocultação ficam salvas neste navegador.
+- O primeiro deslocamento ocorre poucos segundos após entrar; os próximos acontecem regularmente.
+- Durante a digitação, o movimento pausa brevemente e volta sozinho.
+- Produtos podem ser pesquisados pela câmera ou por foto do álbum quando houver código de barras ou QR visível.
+- A imagem é processada somente no navegador e não é enviada nem armazenada.
+- A preferência do sistema por movimento reduzido é respeitada automaticamente.
+- A troca obrigatória de senha está desativada nesta fase; a troca voluntária permanece disponível.
+- A nova senha deve ter ao menos 8 caracteres, com letras e números.
+- Vendedores, coordenadores e administrador podem cadastrar descrições de produtos.
+- A descrição aparece abaixo da foto ampliada do produto.
+- A Garen foi incluída nas fontes oficiais da tela de Manuais.
+- Bases, planilhas, backups, logs e manuais internos receberam proteção adicional.
+
+IMPORTANTE
+Para vendedores fora da loja, prefira um túnel
+HTTPS com uma lista de pessoas autorizadas. DDNS com redirecionamento direto de porta não
+fornece criptografia, proteção de borda ou disponibilidade de nuvem. Antes da versão final,
+ainda será necessário banco de dados adequado, backups externos e uma implantação profissional.
+
+COMO INSTALAR NO WINDOWS
+1. Extraia todo o ZIP para uma pasta.
+2. Clique duas vezes em INSTALAR_SEG_VENDAS.bat.
+3. Aguarde a criação do atalho “SEG Vendas” na Área de Trabalho.
+4. Nas próximas vezes, abra pelo atalho.
+
+O instalador também serve para atualizar. Antes de copiar a nova versão, ele guarda as bases
+da instalação anterior em backups_instalador e preserva clientes, usuários, fotos e manuais.
+
+MODO PORTÁTIL
+Se não quiser instalar, extraia o ZIP e execute iniciar_app.bat diretamente na pasta.
+
+ACESSO NA REDE
+- No computador instalado, o SEG Vendas abre como uma janela de aplicativo.
+- Em outros computadores ou celulares da mesma rede, o acesso continua sendo pelo navegador.
+- No modo túnel seguro, os vendedores autorizados podem acessar pelo endereço HTTPS público.
+- No Android e no iPhone/iPad, pode ser criado um atalho na tela inicial pelo menu do navegador.
+- Esse atalho não é uma instalação independente pela Play Store ou App Store.
+- O computador principal precisa permanecer ligado, com o SEG Vendas e o túnel abertos.
+- Use o endereço local ou público exibido na janela preta do computador principal.
+- O IP local pode mudar após reiniciar o computador ou o roteador.
+- O acesso externo deve usar HTTPS e lista de autorizados.
+
+COMO PESQUISAR PELO CELULAR
+1. Abra Catálogo ou a etapa Produtos do orçamento.
+2. Toque em Câmera para fotografar o código, ou em Álbum para escolher uma foto já salva.
+3. Deixe o código de barras ou QR inteiro, nítido e bem iluminado dentro da imagem.
+4. O código encontrado é colocado no campo de pesquisa; confira o produto antes de adicioná-lo.
+
+OBSERVAÇÃO SOBRE FOTOS
+A pesquisa identifica código de barras ou QR visível. Ela não reconhece um produto apenas pela
+aparência da embalagem. Quando o EAN do fabricante for diferente do código interno SEG, esse
+relacionamento precisará ser cadastrado para localizar o produto correto.
+
+Consulte também: ALTERACOES_V5_7.txt e ALTERACOES_V5_6.txt
+
+============================================================
+
+HISTÓRICO — SEG VENDAS 5.4.2
+
+SEG VENDAS 5.4 PREMIUM — ORÇAMENTO EM ETAPAS CLICÁVEIS
+===========================================================
+
+COMO ABRIR
+1. Extraia todo o ZIP para uma pasta do Windows.
+2. Execute iniciar_app.bat.
+3. O navegador será aberto automaticamente.
+4. Para acessar pelo celular, use o endereço exibido na janela preta. O celular e o computador precisam estar na mesma rede Wi-Fi.
+
+NOVO FLUXO DE ENTRADA
+- O aplicativo abre diretamente na tela de login.
+- O usuário informa seu código ou nome de usuário e a senha.
+- Depois da autenticação aparece a tela “Onde você quer ir hoje?”.
+- O botão de casinha no cabeçalho retorna a esse menu a qualquer momento.
+
+ACESSO POR PERFIL
+CLIENTE
+- Catálogo.
+- Manuais técnicos.
+- Não vê orçamento, clientes, assistente interno, fórum, histórico ou ajustes.
+- Nos manuais, recebe somente documentos marcados como públicos.
+
+VENDEDOR
+- Novo orçamento, catálogo, manuais, assistente, suporte e histórico.
+
+COORDENADOR / ADMINISTRADOR
+- Todos os recursos, incluindo ajustes, fotos, importações e administração de manuais.
+
+PRIMEIRO ACESSO E SENHAS
+- Funcionário com código cadastrado:
+  Login: código do funcionário
+  Senha inicial: SEG@CÓDIGO
+  Exemplo: código 25 / senha SEG@25
+
+- Conta sem código associado:
+  Login: nome de usuário
+  Senha inicial: SEG@USUÁRIO
+
+- Cliente de teste:
+  Login: cliente
+  Senha: cliente123
+
+- Administrador de teste:
+  Login: admin
+  Senha: segadmin
+
+TROCAR A PRÓPRIA SENHA
+- Entre no aplicativo.
+- Clique no botão de chave no cabeçalho.
+- Informe a senha atual e a nova senha.
+- A senha é armazenada como hash protegido; o texto da senha não é salvo no arquivo de usuários.
+
+MENU “ONDE VOCÊ QUER IR HOJE?”
+Funcionários autorizados veem:
+- Novo Orçamento.
+- Catálogo.
+- Manuais.
+- Clientes.
+
+Clientes veem somente:
+- Catálogo.
+- Manuais.
+
+RECURSOS PRESERVADOS
+- Orçamento guiado.
+- Catálogo e preços.
+- Fotos centralizadas.
+- Clientes.
+- Manuais e Central de Ajuda SEG.
+- Fórum interno para funcionários autorizados.
+- Assistente SEGuito.
+- Histórico e ajustes conforme o perfil.
+
+REGISTRO DE ACESSOS
+Os acessos, saídas e trocas de senha são registrados em:
+data\usuarios_log.txt
+
+BACKUP
+Antes de trocar de computador, faça cópia das pastas:
+- data
+- manuais
+
+OBSERVAÇÃO
+Esta versão permite acesso externo por túnel HTTPS. A evolução para banco de dados gerenciado, recuperação de senha e backups automatizados deve seguir o plano do projeto principal.
+
+SEG Vendas 5.9.4 Premium Beta — pesquisa inteligente, categorias e rede para homologação controlada.

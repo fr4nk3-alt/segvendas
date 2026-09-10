@@ -1,0 +1,18 @@
+CHECKLIST RÁPIDO — SEG VENDAS 5.2
+
+[ ] Abrir iniciar_app.bat e confirmar que a tela de login aparece primeiro.
+[ ] Digitar parte do login/senha e observar SEGuito atento.
+[ ] Tentar uma senha errada e observar a expressão preocupada.
+[ ] Entrar como arilson / seg123 e confirmar que Ajustes não aparece.
+[ ] Entrar como dayany / seg123 e confirmar Ajustes, câmera e relatórios.
+[ ] Pesquisar os códigos 19467, 19628, 20689 e 21467 e abrir as fotos.
+[ ] Como coordenadora, enviar uma foto e confirmar o arquivo em data\fotos_produtos.
+[ ] Copiar manualmente uma foto código.jpg para a pasta e usar Atualizar catálogo.
+[ ] Confirmar que vendedor e cliente não veem o botão de edição de foto.
+[ ] Importar uma cópia de teste do CSV em Ajustes > Base de clientes.
+[ ] Abrir um orçamento, pesquisar cliente e selecionar um resultado.
+[ ] Confirmar preenchimento automático de nome, código, documento, telefone e endereço.
+[ ] Cadastrar um manual PDF como coordenadora.
+[ ] Pesquisar um artigo no SEG Ajuda com internet disponível.
+[ ] Gerar orçamento em foto e PDF e testar o compartilhamento no celular.
+[ ] Desligar o servidor e confirmar que funções centrais deixam de responder.

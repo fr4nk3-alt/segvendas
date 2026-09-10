@@ -1,0 +1,62 @@
+SEG VENDAS 5.9.13 PREMIUM - VERSAO DE DISTRIBUICAO
+
+Esta versao ja vem com as seguintes integracoes prontas:
+
+1. MAPEAMENTO DE CODIGO DE BARRAS (EAN)
+   - ean_map.js gerado a partir do relatorio Dataplace
+   - 6.259 associacoes EAN -> codigo interno
+   - Busca por EAN no aplicativo e no leitor de camera
+
+2. INTEGRACAO COM LEITORES GERTEC
+   - Servidor TCP na porta 6500
+   - Leitores Gertec conectam ao IP do computador do SEG Vendas
+   - Consulta de preco automatica por EAN ou codigo interno
+
+3. CADASTROS DE FUNCIONARIOS E CLIENTES
+   - funcionarios.csv ja importado (User ID 15 e demais)
+   - clientes.csv ja importado (21.083 clientes)
+
+COMO INSTALAR
+
+1. Descompacte esta pasta em qualquer lugar do computador da loja.
+2. A pasta principal sera: SEG_Vendas_5.9.13_Premium_Principal
+3. Execute: iniciar_app.bat
+4. Aguarde o servidor iniciar.
+
+ACESSE NO NAVEGADOR
+
+- No mesmo computador: http://localhost:8080
+- No celular (mesma rede Wi-Fi): http://IP-DO-COMPUTADOR:8080
+
+Para descobrir o IP do computador:
+  Inicie o CMD e digite: ipconfig
+  Procure por "Endereco IPv4"
+
+ACESSO DE FABRICA
+
+- Funcionario User ID 15: 15 / SEG@15
+- Cliente: cliente / cliente123
+- Admin: admin / segadmin
+
+ATENCAO: MUDE AS SENHAS DE FABRICA APOS O PRIMEIRO ACESSO.
+
+CONFIGURAR LEITOR GERTEC
+
+No display do leitor Gertec, informe:
+- IP do servidor: IP do computador do SEG Vendas
+- Porta: 6500
+- Mascara de rede: mesma da rede local
+- IP do terminal: um IP unico para cada leitor
+
+ATUALIZAR CATALOGO OU EAN MAP
+
+1. Coloque o novo products.js na pasta principal
+2. Coloque o novo ean_map.js na pasta principal
+3. Reinicie o servidor
+
+A pasta "data\funcionarios.csv" pode ser substituida por uma nova exportacao.
+A pasta "data\clientes.csv" pode ser substituida por uma nova exportacao.
+
+SUPORTE
+- Documentacao: docs\ESTRUTURA_E_FUNCOES.md
+- Ferramentas: SEG\ferramentas\

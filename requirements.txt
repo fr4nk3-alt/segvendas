@@ -1,0 +1,3 @@
+# SEG Vendas usa apenas a biblioteca padrao do Python (>= 3.11).
+# Nenhuma dependencia externa e necessaria para executar o servidor ou os testes.
+# O runtime portatil para Windows (Python 3.13) esta em runtime/.

@@ -1,0 +1,122 @@
+RELATÓRIO DE TESTES — SEG VENDAS 5.7.7 PREMIUM
+================================================
+
+DATA: 10/08/2026
+
+ARQUIVOS E INTEGRIDADE
+[OK] Sintaxe de app.js, v55.js, v56.js, v57.js, v572.js, v575.js, v576.js e v577.js.
+[OK] v577.css mantém a lâmpada ao lado dos três avatares e inclui ajuste responsivo específico para celular.
+[OK] Sintaxe do servidor Python.
+[OK] Manifesto válido e identificação atualizada para 5.7.7.
+[OK] HTML sem identificadores duplicados.
+[OK] Todos os arquivos locais citados pelo HTML existem.
+[OK] Biblioteca local de leitura de códigos acompanhada das licenças e do resumo de integridade.
+[OK] Assinatura SRI do arquivo local confere com o conteúdo distribuído.
+
+ASSISTENTE TÉCNICO
+[OK] Curiosidade automática aparece ao abrir a aba Assistente.
+[OK] Resposta DVR/NVR apresenta orientação técnica e pergunta de diagnóstico.
+[OK] Pesquisa pelo código 22713 devolveu o produto e o preço do catálogo.
+[OK] Botão Curiosidade técnica aparece também na janela da lâmpada.
+[OK] A janela do mascote foi conferida visualmente sem sobreposição no título.
+
+RECUPERAÇÃO DE SENHA
+[OK] Estado da senha mestre é consultado sem expor segredo ou hash.
+[OK] Senha mestre incorreta foi rejeitada com HTTP 401.
+[OK] Senha mestre correta redefiniu a senha do funcionário de teste.
+[OK] Login com a nova senha foi aceito após a recuperação.
+[OK] Sessões anteriores são revogadas e tentativas recebem limite por IP e usuário.
+
+PERFIS DO FÓRUM
+[OK] Nova dúvida exibe os dez perfis permitidos, incluindo Colaborador SEG.
+[OK] Formulário de resposta exibe a mesma lista de perfis.
+[OK] Administrador recebe Colaborador SEG como sugestão inicial.
+[OK] Publicação real de teste como Suporte técnico SEG foi salva e exibida corretamente.
+[OK] Resposta real de teste como Colaborador SEG foi salva e exibida corretamente.
+[OK] Perfil escolhido permanece salvo após publicar uma nova dúvida.
+[OK] Valores fora da lista fechada são substituídos por perfil seguro.
+[OK] Selo Oficial SEG continua separado do perfil escolhido.
+[OK] Nome de resposta oficial vem da sessão autenticada.
+[OK] Teste limpo no navegador concluído sem avisos ou erros no console.
+
+CLIENTES E PRODUTOS
+[OK] Cliente bloqueado aparece em vermelho com o selo BLOQUEADO na pesquisa do orçamento.
+[OK] O botão de seleção do cliente bloqueado fica desativado.
+[OK] Produto inativo aparece em vermelho/cinza, com preço riscado e indicação INATIVO.
+[OK] O botão de adicionar produto inativo fica desativado.
+[OK] Coordenador e administrador podem inativar e reativar produtos.
+[OK] Cliente recebeu HTTP 403 ao tentar alterar a situação de um produto.
+
+MODELOS DE ORÇAMENTO
+[OK] Modelo real de teste foi criado, listado e removido.
+[OK] Produtos e quantidades foram salvos sem dados pessoais do cliente.
+[OK] O modelo usa descrição e preço atuais do catálogo ao ser aplicado.
+[OK] Cliente recebeu HTTP 403 ao tentar acessar os modelos internos.
+[OK] Janela conferida em tela ampla e em viewport de celular 390 × 844.
+
+INSTALADOR PARA WINDOWS
+[OK] Sintaxe do instalador PowerShell validada.
+[OK] Primeira instalação simulada em pasta isolada.
+[OK] Runtime Python incorporado foi copiado e reconhecido.
+[OK] Atualização simulada preservou arquivo existente na base data.
+[OK] Backup da base anterior foi criado antes da atualização.
+[OK] Cópia instalada iniciou o servidor com o runtime incorporado.
+[OK] Página 5.7.7 respondeu HTTP 200 usando somente o runtime do pacote.
+[OK] Atalho instalado aponta para a abertura em modo aplicativo.
+[OK] Edge/Chrome têm preferência; navegador padrão é usado como alternativa.
+
+SEGUITO NAS TELAS DE ENTRADA
+[OK] O SVG original do SEGuito foi restaurado na tela de acesso e no menu inicial.
+[OK] Login exibe o SEGuito sério e preserva as expressões de atenção, alegria e erro.
+[OK] O menu “Onde você quer ir hoje?” exibe o SEGuito sorrindo.
+[OK] Tamanho conferido: 184 × 158 pixels em tela ampla e 158 × 137 no celular.
+[OK] O NestorX permanece escondido nas telas de entrada.
+[OK] Ao abrir uma área, o SEGuito fica oculto e somente o NestorX móvel aparece.
+[OK] Piscar configurado em ciclo de 2 segundos: duas piscadas rápidas, pausa de 0,5 segundo e uma curta.
+
+NESTORX
+[OK] Personagem de corpo inteiro exibido livremente nas bordas do aplicativo.
+[OK] Movimento automático inicia em poucos segundos e percorre uma distância visível.
+[OK] A lâmpada continua clicável enquanto o personagem está caminhando.
+[OK] A janela abre com a pergunta fixa “Como posso ajudar?”.
+[OK] O campo não recebe foco automaticamente; é necessário clicar para escrever.
+[OK] Enter e o ícone de envio direcionam para produtos, clientes, manuais e demais áreas permitidas.
+[OK] A busca por “manual PDF da Garen” abriu Manuais, sem confundir com a finalização do orçamento.
+[OK] A busca por produto abriu o Catálogo e preencheu o termo informado.
+[OK] A janela contém somente os ícones de pausar/retomar e ocultar.
+[OK] O ícone de pausa muda para retomar e mantém um nome acessível.
+[OK] Esc fecha a janela e devolve o foco à lâmpada.
+[OK] Ocultar transfere o foco para a pequena lâmpada; restaurar devolve o foco à lâmpada principal.
+[OK] O aviso “Animação desativada pelo Windows” aparece em vermelho e negrito quando aplicável.
+
+SELETOR DE MASCOTE
+[OK] A janela da lâmpada exibe NestorX, SEGuito e Pretinha.
+[OK] A opção selecionada recebe indicação visual e aria-pressed.
+[OK] A imagem, o nome e os nomes acessíveis dos controles acompanham a escolha.
+[OK] A preferência é persistida localmente no navegador.
+[OK] Pretinha possui PNG transparente e WebP otimizado.
+[OK] Os três mascotes foram conferidos em tela ampla e celular.
+
+PESQUISA POR CÂMERA OU ÁLBUM
+[OK] Catálogo e Produtos do orçamento exibem Câmera e Álbum.
+[OK] No celular, Câmera solicita a câmera traseira quando o navegador oferece essa opção.
+[OK] Álbum aceita uma imagem já salva no aparelho.
+[OK] A leitura procura código de barras ou QR e apenas preenche o campo de pesquisa.
+[OK] A imagem é processada localmente, não é enviada ao servidor e não fica armazenada.
+[OK] Links contidos em QR não são abertos automaticamente.
+[OK] Há limite de 15 MB, validação de formato, limite de resolução e redução segura da imagem.
+[OK] O leitor local foi carregado e ficou disponível no teste da página.
+[LIMITAÇÃO] A seleção automatizada de uma foto foi recusada pela permissão do navegador de teste.
+[VALIDAÇÃO FINAL] Recomenda-se ler um código real em Android e iPhone na mesma rede do computador.
+
+TESTE VISUAL E INTERATIVO
+[OK] A interface foi carregada no navegador de teste sem erro ou alerta no console.
+[OK] Clique durante o deslocamento abriu a janela corretamente.
+[OK] O campo permaneceu inativo até um clique explícito da pessoa.
+[OK] Os dois controles por ícone ficaram visíveis e operantes.
+[OK] Os controles de toque principais medem pelo menos 44 × 44 pixels.
+
+SERVIDOR LOCAL
+[OK] Arquivos JavaScript, CSS, imagens do NestorX e manifesto respondem localmente.
+[OK] Sessões sem autenticação continuam protegidas.
+[OK] A versão apresentada pelo servidor e pelos endereços de acesso é 5.7.7.

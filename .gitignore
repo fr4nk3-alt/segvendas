@@ -1,0 +1,49 @@
+# Dados locais e informações de produção — nunca versionar
+data/*.json
+data/*.sqlite3
+data/*.sqlite3-*
+data/*.csv
+data/*.CSV
+data/*.xls
+data/*.xlsx
+data/backups/*
+data/fotos_perfil/*
+data/fotos_produtos/*
+data/network_config.json
+data/master_recovery.json
+data/password_reset_requests.json
+data/access_requests.json
+data/integrations.json
+data/quote_history.json
+data/quote_templates.json
+data/product_statuses.json
+data/product_categories.json
+data/product_descriptions.json
+data/supabase_config.json
+data/*.txt
+data/*.log
+*.env
+*.local.env
+
+# Mantém apenas os modelos e instruções demonstrativos
+!data/modelo_clientes.csv
+!data/modelo_funcionarios.csv
+!data/LEIA-ME.txt
+!data/fotos_produtos/LEIA-ME.txt
+
+# Arquivos locais do ambiente
+__pycache__/
+*.pyc
+*.pyo
+*.log
+outputs/
+work/
+*.zip
+backups_instalador/
+
+# Codigo sem uso aguardando exclusao (ver _descartados/LEIA-ME.txt)
+_descartados/
+
+# Python embutido para Windows (binarios). Baixado do pacote "embeddable"
+# oficial python.org 3.13.x; faz parte do ZIP de distribuicao, nao do repositorio.
+runtime/

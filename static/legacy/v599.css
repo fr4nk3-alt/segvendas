@@ -1,0 +1,36 @@
+/* SEG Vendas 5.9.9 — instalação no celular e identidade do atalho */
+.mobile-install-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 14px;
+  padding: 12px 13px;
+  border: 1px solid #b9d9c7;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f1faf4, #ffffff);
+  text-align: left;
+}
+.mobile-install-copy strong,
+.mobile-install-copy span { display: block; }
+.mobile-install-copy strong { color: #075c36; font-size: 12px; }
+.mobile-install-copy span { margin-top: 3px; color: #5d7065; font-size: 10px; line-height: 1.35; }
+.mobile-install-btn { min-height: 40px; padding: 8px 12px; border-radius: 10px; font-size: 11px; white-space: nowrap; }
+.mobile-install-status {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #65756c;
+  font-size: 10px;
+  line-height: 1.35;
+}
+.mobile-install-status.is-ready { color: #006a3b; font-weight: 800; }
+.mobile-install-status.is-installed { color: #006a3b; font-weight: 800; }
+.mobile-install-status.is-warning { color: #8a6200; }
+.mobile-install-card.is-installed .mobile-install-btn { display: none; }
+.mobile-install-login { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 5px; margin-top: 8px; }
+.mobile-install-login .text-btn { font-size: 11px; }
+.mobile-install-login span { color: #7a887f; font-size: 9px; }
+@media (max-width: 520px) {
+  .mobile-install-card { grid-template-columns: 1fr; }
+  .mobile-install-btn { width: 100%; }
+}

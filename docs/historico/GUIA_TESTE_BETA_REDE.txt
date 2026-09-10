@@ -1,0 +1,52 @@
+GUIA — TESTE BETA FORA DA LOJA
+===============================
+
+RESPOSTA DIRETA
+DDNS + porta aberta pode colocar o aplicativo acessível, mas não é a melhor maneira de testar
+com dados de clientes. DDNS resolve apenas o nome do endereço. Ele não cria HTTPS, não limita
+quem chega à tela de login e não protege o computador contra tráfego da internet.
+
+MODO RECOMENDADO
+Use um túnel HTTPS protegido por uma lista de e-mails dos vendedores Beta.
+
+Configuração do aplicativo:
+1. Feche o SEG Vendas.
+2. Abra “Configurar rede SEG Vendas Beta”.
+3. Escolha “Túnel seguro com HTTPS”.
+4. Mantenha 127.0.0.1 e uma porta interna como 8080.
+5. Informe o domínio HTTPS configurado no túnel, por exemplo https://beta.suaempresa.com.
+6. Salve e reinicie o aplicativo.
+
+Vantagens:
+- não precisa abrir porta de entrada no roteador;
+- o servidor interno fica acessível somente no próprio computador;
+- HTTPS protege senha e sessão durante o transporte;
+- uma camada externa pode liberar somente os vendedores escolhidos;
+- o acesso pode ser desligado rapidamente ao terminar o teste.
+
+SE OPTAR POR DDNS DIRETO
+1. Escolha “DDNS + porta aberta” no configurador.
+2. Defina a porta interna fixa.
+3. Informe o hostname DDNS e a porta pública.
+4. No roteador, encaminhe a porta pública para o IP local fixo do servidor e sua porta interna.
+5. Crie uma regra restrita no Firewall do Windows somente para a porta escolhida.
+6. Teste pela internet móvel, fora do Wi-Fi da loja.
+
+Não use https:// no DDNS apenas por escrever “https” no endereço. Para HTTPS funcionar é
+necessário um túnel ou reverse proxy que tenha um certificado válido e encaminhe para o servidor.
+
+REGRAS PARA O BETA
+- liberar somente vendedores escolhidos;
+- remover ou desativar contas de demonstração antes do acesso externo;
+- usar senhas individuais fortes;
+- não usar uma base completa de clientes no primeiro ensaio externo;
+- manter backup antes de cada rodada de testes;
+- registrar quais problemas ocorreram e em qual aparelho/navegador;
+- desligar o acesso externo quando a rodada terminar.
+
+O QUE ESTA VERSÃO NÃO FAZ
+- não abre automaticamente o roteador ou o Firewall;
+- não configura um fornecedor de DDNS;
+- não instala nem configura um túnel;
+- não substitui hospedagem em nuvem;
+- não garante operação se o computador do servidor estiver desligado ou sem internet.

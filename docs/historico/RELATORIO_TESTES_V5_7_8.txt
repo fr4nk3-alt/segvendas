@@ -1,0 +1,64 @@
+RELATÓRIO DE TESTES — SEG VENDAS 5.9.0 PREMIUM
+================================================
+
+TESTES 5.9.0 — EQUIPE, VENDAS E INTEGRAÇÕES
+[OK] Coordenador recebeu somente os registros da própria loja.
+[OK] Vendedor recebeu acesso negado ao histórico da equipe.
+[OK] Administrador visualizou registros de todas as lojas.
+[OK] Filtros por vendedor e situação validados no Microsoft Edge.
+[OK] “Registrar como venda” gravou situação e data de confirmação.
+[OK] Orçamento, entrega e venda foram contabilizados separadamente.
+[OK] Configuração de API acessível somente ao administrador.
+[OK] Credencial protegida com DPAPI do Windows e omitida das respostas da API.
+[OK] Teste real de conexão HTTP executado em servidor isolado.
+
+TESTES 5.8.1 — SELOS DE GARANTIA
+[OK] Dois produtos exibiram individualmente o botão “Adicionar selo”.
+[OK] Quantidade 10 gerou exatamente 10 campos de selo.
+[OK] Quantidade 1 gerou exatamente 1 campo de selo.
+[OK] Campos vazios foram aceitos sem bloquear o salvamento.
+[OK] Selos foram mantidos nas posições das respectivas unidades.
+[OK] Servidor preservou os selos ao sanitizar e salvar o pedido no histórico.
+[OK] Orçamento, compartilhamento e formulário de entrega exibem os selos preenchidos.
+
+TESTES 5.8.0 — APROVAÇÃO DE CLIENTES
+[OK] CPF/CNPJ ausente gera solicitação pendente e não cria sessão de acesso.
+[OK] Somente administrador autenticado consegue listar solicitações.
+[OK] A listagem administrativa não expõe hash, senha ou dados internos de autenticação.
+[OK] Botão de aprovação cria o usuário com perfil exclusivo de cliente.
+[OK] Login do cliente aprovado validado com a senha definida no cadastro.
+[OK] Solicitação e aprovação ficam registradas em auditoria.
+
+CORREÇÃO 5.7.9
+[OK] Foto do produto renderizada dentro do item do orçamento.
+[OK] Botão da foto ligado à mesma visualização usada no catálogo.
+[OK] Formulário de entrega abre usando a rotina atual de sincronização do orçamento.
+[OK] Dados da entrega são sanitizados e mantidos pelo servidor no histórico.
+[OK] Botões de impressão salvam a entrega antes de gerar o documento.
+
+CORREÇÃO 5.7.8.1
+[OK] Login real com usuário admin sem foto executado no Microsoft Edge automatizado.
+[OK] Tela inicial abriu, tela de login fechou e nenhuma mensagem JavaScript foi registrada.
+[OK] O elemento da foto de perfil permaneceu presente depois da aplicação da inicial do usuário.
+[OK] Recriação defensiva do elemento de avatar validada por sintaxe e pelo fluxo completo de login.
+
+[OK] servidor.py compilado sem erros de sintaxe.
+[OK] app.js, v575.js e v578.js validados pelo interpretador JavaScript.
+[OK] index.html analisado sem erro estrutural e manifest.webmanifest validado como JSON.
+[OK] POST e GET do histórico autenticado testados em servidor isolado.
+[OK] Atualização do mesmo pedido mantém um único registro, sem duplicação.
+[OK] Não existe rota DELETE para pedidos normais do histórico.
+[OK] Vendedor cria e reutiliza pedido modelo, mas recebe acesso negado ao tentar excluí-lo.
+[OK] Administrador visualiza a permissão e consegue excluir pedido modelo.
+[OK] Modelos não possuem mais descarte automático pelo limite antigo.
+[OK] Upload, leitura e remoção da foto de perfil testados em servidor isolado.
+[OK] A câmera do navegador foi permitida apenas para a própria origem do aplicativo.
+[OK] Cadastro de produto possui entradas separadas para câmera traseira e álbum.
+[OK] Foto do perfil possui entradas separadas para câmera frontal e arquivo do aparelho.
+[OK] Histórico local anterior é enviado ao servidor na primeira sincronização autenticada.
+[OK] Cópia local continua disponível quando o servidor estiver temporariamente indisponível.
+[OK] Instalação nova executada em pasta isolada com o runtime incluído no pacote.
+[OK] Atualização sobre instalação existente preservou quote_history.json e fotos_perfil.
+
+Observação: os testes de API usam diretório temporário e não alteram clientes, usuários,
+históricos, modelos ou fotos da instalação real.

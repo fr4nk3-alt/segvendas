@@ -1,0 +1,132 @@
+INSTRUÇÕES RÁPIDAS — SEG VENDAS 5.9.13 PREMIUM
+================================================
+
+INSTALAÇÃO RECOMENDADA
+1. Extraia todo o ZIP para uma pasta do Windows.
+2. Clique duas vezes em INSTALAR_SEG_VENDAS.bat.
+3. Aguarde o atalho “SEG Vendas” ser criado na Área de Trabalho.
+4. Abra o sistema pelo atalho nas próximas vezes.
+
+O instalador também atualiza versões existentes. Antes da atualização, ele protege as pastas
+data e manuais e mantém clientes, usuários, fotos e documentos já cadastrados.
+
+CESTA E PESQUISA DE PRODUTOS
+1. Ao adicionar um produto, observe o pensamento que acompanha NestorX, SEGuito ou Pretinha.
+2. Clique em “Na cesta” para conferir itens, quantidades e subtotal.
+3. Use +, − ou o campo numérico para ajustar a quantidade; × remove somente aquela linha.
+4. “Ver no orçamento” abre diretamente a etapa Produtos do orçamento atual.
+5. Na pesquisa, escolha 8, 16, 24, 32, 40 ou 50 linhas por página.
+6. Use o filtro de categoria quando quiser restringir os resultados.
+7. “Ocultar resultados” recolhe a lista sem apagar o texto; “Mostrar resultados” abre novamente.
+8. Use “Anterior” e “Próxima” para navegar pelas páginas. A busca aceita erros de digitação e abreviações comuns.
+
+O pensamento usa exatamente os mesmos itens do orçamento — não cria um segundo pedido.
+
+NUMERAÇÃO POR FILIAL
+1. Todo orçamento novo recebe a sigla da filial e cinco dígitos: `MA00001` (Matriz),
+   `OE00001` (Oeste), `SC00001` (São Cristóvão) ou `LA00001` (Lagos).
+2. Na SEG Oeste, por exemplo, o formato será `OE00022`.
+3. A numeração continua funcionando sem internet. Ao salvar, o servidor local confirma
+   a sequência e impede que dois terminais usem o mesmo número.
+4. Pedidos antigos somente numéricos são convertidos automaticamente para o padrão
+   da filial; o número anterior é guardado internamente como referência histórica.
+
+CATEGORIAS DE PRODUTOS (ADMINISTRADORES)
+1. Abra Ajustes e localize “Categorias de produtos”.
+2. Para criar uma categoria, informe o nome e clique em “Criar categoria”.
+3. Para alterar um produto, informe o código ou parte da descrição, escolha a categoria e clique em “Salvar categoria do produto”.
+4. Vendedores e coordenadores apenas visualizam o filtro; a criação e a alteração ficam restritas aos administradores.
+
+CONFIGURAR IP, PORTA E ENDEREÇO PÚBLICO
+1. Feche o SEG Vendas.
+2. Abra o atalho “Configurar rede SEG Vendas” criado na Área de Trabalho.
+3. Escolha um dos modos:
+   - Túnel seguro com HTTPS: recomendado para vendedores fora da loja.
+   - DDNS + porta aberta: funciona tecnicamente, mas não é recomendado para dados reais.
+   - Rede local: uso somente no Wi-Fi/rede da loja.
+   - Avançado: permite informar 127.0.0.1, 0.0.0.0 ou um IP local específico.
+4. Informe a porta interna. A porta 8080 continua sendo a sugestão padrão.
+5. Quando houver túnel ou DDNS, informe a URL pública completa.
+6. Salve e abra novamente o aplicativo.
+
+IMPORTANTE
+- DDNS é o nome público e não deve ser digitado no campo “IP de escuta”.
+- 127.0.0.1 deixa o aplicativo disponível somente para um túnel executado no mesmo servidor.
+- 0.0.0.0 permite acesso pelas placas de rede do computador.
+- O configurador não abre portas no roteador ou no Firewall do Windows.
+- HTTPS exige túnel ou reverse proxy; o servidor interno continua usando HTTP local.
+- A configuração fica em data\network_config.json e é preservada nas atualizações.
+
+RECUPERAÇÃO DE SENHA PELO SERVIDOR LOCAL
+1. No login, o funcionário clica em “Esqueci minha senha” e informa seu código ou usuário.
+2. O pedido aparece em Ajustes somente para administradores.
+3. O administrador clica em “Restaurar para SEG@código”.
+4. O funcionário entra com seu código e a senha de fábrica, por exemplo: 15 / SEG@15.
+
+A troca obrigatória está desativada nesta versão. A troca voluntária continua disponível no perfil.
+
+MODO PORTÁTIL
+Para usar sem instalar, execute iniciar_app.bat dentro da pasta extraída.
+O Python necessário já acompanha esta versão.
+
+ACESSO
+- No computador principal, o atalho abre uma janela com aparência de aplicativo.
+- Outros computadores e celulares da mesma rede acessam pelo navegador.
+- Android e iPhone/iPad podem usar “Adicionar à tela inicial” no menu do navegador.
+- No modo túnel, vendedores autorizados também podem acessar fora da rede da loja.
+- Em qualquer modo, o computador principal precisa permanecer ligado e conectado.
+- Use o endereço local ou público mostrado na janela preta do computador principal.
+- O IP local pode mudar quando o computador ou o roteador reiniciar.
+- Não exponha diretamente o servidor HTTP à internet; use preferencialmente túnel HTTPS protegido.
+
+FUNCIONÁRIOS
+Login: código do funcionário
+Senha inicial: SEG@CÓDIGO
+Exemplo Renato: 15 / SEG@15
+
+CLIENTE SEM CADASTRO
+Na tela de entrada, clique em “Criar cadastro de cliente”.
+O cliente informa os dados solicitados e cria sua própria senha.
+Esse perfil acessa somente Catálogo e Manuais públicos.
+
+CLIENTE DE TESTE
+Login: cliente
+Senha: cliente123
+
+TROCAR SENHA
+Depois de entrar, clique no botão de chave no cabeçalho.
+
+FÓRUM
+O campo Perfil oferece Instalador, Cliente, Colaborador SEG, Vendedor SEG, Coordenador SEG,
+Suporte técnico SEG, Financeiro SEG, Técnico/integrador, Revendedor/parceiro e Outro.
+O selo Oficial SEG é separado e continua exclusivo para coordenadores e administradores.
+
+HISTÓRICO E PEDIDOS MODELOS
+1. No Histórico, use “Reutilizar” para criar um orçamento novo sem alterar o original.
+2. Use “Criar modelo” em um pedido salvo ou abra “Criar ou reutilizar modelo”.
+3. Dê um nome ao pedido modelo e salve.
+4. Para aplicar uma lista pronta, escolha “Reutilizar” no modelo.
+Os preços dos modelos são atualizados e os dados do cliente não são copiados.
+Pedidos normais não possuem exclusão. Somente administradores podem excluir pedidos modelos.
+
+FOTOS
+- No cadastro da foto de um produto, use “Tirar foto” para abrir a câmera traseira do celular.
+- “Escolher do álbum” continua disponível.
+- Para alterar a foto do próprio perfil, toque no nome ou na imagem do usuário no topo.
+
+ESCOLHER O MASCOTE
+1. Entre em uma área do aplicativo e clique no avatar.
+2. Em “Escolher mascote”, toque em NestorX, SEGuito ou Pretinha.
+3. A escolha fica salva neste navegador e pode ser alterada quando quiser.
+4. Use “Curiosidade técnica” para receber uma dica sem precisar escrever.
+
+ASSISTENTE TÉCNICO
+1. Abra a aba Assistente para receber uma curiosidade automática.
+2. Escreva dúvidas como “qual a diferença entre DVR e NVR?” ou “como dimensionar uma fonte?”.
+3. Para pesquisar o catálogo, mencione produto, preço ou código na mensagem.
+
+ATENÇÃO
+Não abra index.html diretamente. Use o atalho, INSTALAR_SEG_VENDAS.bat ou iniciar_app.bat,
+pois o login, os cadastros e as bases dependem do servidor local.
+
+Versão: SEG Vendas 5.9.5 Premium Beta — avatar clicável, orçamento direto e rede configurável

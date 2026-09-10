@@ -1,0 +1,65 @@
+/* SEG Vendas 5.7.2 — pesquisa local por câmera/álbum */
+.visual-search-tools {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 9px 2px 0;
+}
+
+.visual-search-label {
+  color: #53675d;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.visual-search-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid #bdd5c8;
+  border-radius: 10px;
+  background: #eff7f3;
+  color: #075c36;
+  font-size: 11px;
+  font-weight: 850;
+  cursor: pointer;
+  user-select: none;
+}
+
+.visual-search-button:hover { background: #e0f1e8; }
+.visual-search-button:focus-within {
+  outline: 3px solid rgba(7, 130, 75, .22);
+  outline-offset: 2px;
+}
+
+.visual-search-tools.is-reading .visual-search-button {
+  opacity: .55;
+  pointer-events: none;
+}
+
+.visual-search-status {
+  flex-basis: 100%;
+  min-height: 15px;
+  margin: 0;
+  color: #4c6256;
+  font-size: 10.5px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.visual-search-status.is-success { color: #087845; font-weight: 800; }
+.visual-search-status.is-error { color: #b42318; font-weight: 800; }
+
+@media (max-width: 650px) {
+  .visual-search-tools { align-items: stretch; }
+  .visual-search-label { flex-basis: 100%; }
+  .visual-search-button { flex: 1 1 110px; min-height: 44px; font-size: 12px; }
+}
+
+@media print {
+  .visual-search-tools { display: none !important; }
+}

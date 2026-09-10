@@ -1,0 +1,5 @@
+Use o código do produto como nome do arquivo.
+Exemplos: 19467.jpg | 19467.png | 19467.webp
+A foto principal não deve ter sufixo. Fotos adicionais: 19467_2.jpg, 19467_3.jpg.
+Formatos aceitos: JPG, JPEG, PNG e WEBP.
+Depois de copiar, clique em "Atualizar catálogo" nas configurações do coordenador ou reinicie o servidor.

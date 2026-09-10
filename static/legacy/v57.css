@@ -1,0 +1,315 @@
+/* SEG Vendas 5.7.4 — SEGuito na entrada, NestorX guiado e perfis ampliados no fórum */
+
+.nestorx-roamer.seguito-dock {
+  position: fixed;
+  inset: 0;
+  right: auto;
+  bottom: auto;
+  z-index: 55;
+  display: block;
+  width: 100vw;
+  height: 100dvh;
+  pointer-events: none;
+  overflow: visible;
+  contain: layout style;
+}
+
+.nestorx-mover {
+  --nestorx-height: 218px;
+  --nestorx-width: 76px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--nestorx-width);
+  height: var(--nestorx-height);
+  transform: translate3d(12px, 88px, 0);
+  transform-origin: center bottom;
+  transition: transform 2.6s cubic-bezier(.2, .72, .18, 1), opacity .2s ease;
+  will-change: transform;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.nestorx-picture,
+.nestorx-figure {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.nestorx-figure {
+  filter: drop-shadow(0 9px 8px rgba(5, 24, 46, .20));
+}
+
+.nestorx-avatar-button {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.nestorx-avatar-button:active { cursor: grabbing; }
+.nestorx-avatar-button:focus-visible {
+  outline: 3px solid rgba(11, 128, 80, .38);
+  outline-offset: 4px;
+  border-radius: 14px;
+}
+
+.nestorx-mover.is-walking .nestorx-picture {
+  animation: nestorxStep .56s ease-in-out infinite;
+}
+
+.nestorx-mover.is-teleporting { opacity: 0; transition: opacity .18s ease; }
+.nestorx-mover.is-dragging,
+.nestorx-mover.is-positioning { transition: none; }
+.nestorx-roamer.is-suspended .nestorx-mover { opacity: 0; visibility: hidden; }
+
+.nestorx-restore-button {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 1px solid rgba(194, 147, 0, .42);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .92);
+  color: #7a5900;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .18);
+  font-size: 24px;
+  line-height: 1;
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: none;
+  animation: nestorxLamp 2.4s ease-in-out infinite;
+}
+
+.nestorx-restore-button:focus-visible,
+.nestorx-tip button:focus-visible {
+  outline: 3px solid rgba(11, 128, 80, .38);
+  outline-offset: 3px;
+}
+
+.nestorx-tip.seguito-tip {
+  position: absolute;
+  z-index: 4;
+  transform: translate3d(var(--nestorx-tip-shift-x, 0px), var(--nestorx-tip-shift-y, 0px), 0);
+  bottom: 18px;
+  width: min(310px, calc(100vw - 112px));
+  min-width: 210px;
+  padding: 15px 48px 13px 15px;
+  border: 1px solid #cddfd5;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .98);
+  box-shadow: 0 14px 34px rgba(20, 48, 34, .18);
+  pointer-events: auto;
+}
+
+.nestorx-mover.is-left .nestorx-tip { left: calc(100% + 12px); border-bottom-left-radius: 5px; }
+.nestorx-mover.is-right .nestorx-tip { right: calc(100% + 12px); border-bottom-right-radius: 5px; }
+.nestorx-tip strong { color: #006a3b; font-size: 13px; }
+.nestorx-tip p { margin: 5px 0 11px; font-size: 12px; line-height: 1.45; color: #384940; }
+.nestorx-tip > #closeSeguitoTip { width: 44px; height: 44px; right: 2px; top: 2px; cursor: pointer; }
+.nestorx-tip > #closeSeguitoTip:focus-visible { outline-offset: -4px; }
+
+.nestorx-tip .visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.nestorx-help-form { margin: 0; }
+.nestorx-help-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 7px;
+}
+
+.nestorx-help-row input {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  padding: 8px 10px;
+  border: 1px solid #bfd5c9;
+  border-radius: 10px;
+  background: #fff;
+  color: #173b2a;
+  font: inherit;
+  font-size: 16px;
+}
+
+.nestorx-help-row input:focus {
+  border-color: #07824b;
+  outline: 3px solid rgba(7, 130, 75, .16);
+}
+
+.nestorx-help-send {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: #087845;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.nestorx-help-send:hover { background: #056239; }
+.nestorx-tip p.nestorx-help-feedback {
+  min-height: 16px;
+  margin: 6px 1px 0;
+  color: #3c5548;
+  font-size: 11px;
+}
+.nestorx-tip p.nestorx-help-feedback.is-error { color: #b42318; font-weight: 800; }
+.nestorx-tip p.nestorx-motion-status {
+  margin: 7px 1px 0;
+  color: #b42318;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.nestorx-tip-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #e1ebe5;
+}
+
+.nestorx-tip-actions button {
+  min-height: 34px;
+  padding: 6px 9px;
+  border: 1px solid #c9ded2;
+  border-radius: 9px;
+  background: #eff7f3;
+  color: #075c36;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.nestorx-tip-actions button:hover { background: #e0f1e8; }
+
+.nestorx-tip-actions button.nestorx-icon-action {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.nestorx-icon-action svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nestorx-tip-actions button.nestorx-system-motion-warning,
+.nestorx-tip-actions button.nestorx-system-motion-warning:disabled {
+  border-color: #e6a49d;
+  background: #fff0ee;
+  color: #b42318;
+  font-weight: 900;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.nestorx-restore-button {
+  left: 0;
+  bottom: 6px;
+  cursor: pointer;
+  animation: none;
+}
+
+.nestorx-roamer.is-user-hidden .nestorx-picture,
+.nestorx-roamer.is-user-hidden .nestorx-avatar-button,
+.nestorx-roamer.is-user-hidden .nestorx-tip { display: none !important; }
+
+.nestorx-roamer.is-user-hidden .nestorx-mover {
+  width: 44px;
+  height: 50px;
+}
+
+@keyframes nestorxStep {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0); }
+  25% { transform: translate3d(0, -4px, 0) rotate(-1deg); }
+  75% { transform: translate3d(0, -2px, 0) rotate(1deg); }
+}
+
+@keyframes nestorxLamp {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@media (max-width: 650px) {
+  .nestorx-mover { --nestorx-height: 126px; --nestorx-width: 44px; }
+  .nestorx-tip.seguito-tip {
+    top: 0;
+    bottom: auto;
+    width: min(250px, calc(100vw - 62px));
+    min-width: 0;
+    max-width: calc(100vw - 62px);
+    max-height: min(320px, calc(100dvh - 100px));
+    overflow: auto;
+  }
+  .nestorx-mover.is-left .nestorx-tip { left: calc(100% + 7px); }
+  .nestorx-mover.is-right .nestorx-tip { right: calc(100% + 7px); }
+  .nestorx-mover.is-lower-half .nestorx-tip { top: auto; bottom: 2px; }
+}
+
+@media (max-height: 520px) {
+  .nestorx-mover { --nestorx-height: 92px; --nestorx-width: 32px; }
+  .nestorx-tip.seguito-tip { max-height: calc(100dvh - 74px); overflow: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nestorx-mover,
+  .nestorx-mover.is-walking .nestorx-picture,
+  .nestorx-avatar-button {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media print {
+  .nestorx-roamer { display: none !important; }
+}

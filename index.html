@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#006a3b" name="theme-color"/>
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta content="SEG Vendas 5.9.13 Premium — estrutura organizada e documentação do projeto." name="description"/>
+<title>SEG Vendas 5.9.13 Premium</title>
+<link href="manifest.webmanifest?v=5.9.14" rel="manifest"/>
+<link href="assets/seg-vendas.ico" rel="icon" sizes="any" type="image/x-icon"/>
+<link href="assets/icon-192.png" rel="apple-touch-icon"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="SEG Vendas" name="apple-mobile-web-app-title"/>
+<link href="assets/icon-192.png" rel="icon"/>
+<link href="styles.css?v=5.9.14" rel="stylesheet"/>
+</head>
+<body class="auth-locked">
+<section aria-labelledby="loginTitle" class="login-screen" id="loginScreen">
+<div class="login-card login-only-card">
+<div aria-hidden="true" class="seguito-mascot serious" id="seguitoLogin">
+<svg focusable="false" viewBox="0 0 220 190">
+<defs><linearGradient id="seguitoBodyLogin" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#0b8050"></stop><stop offset="1" stop-color="#004d2b"></stop></linearGradient></defs>
+<path class="seguito-antenna" d="M110 28v-16"></path><circle class="seguito-light" cx="110" cy="10" r="7"></circle>
+<rect class="seguito-head" height="112" rx="38" width="144" x="38" y="32"></rect><rect class="seguito-face" height="78" rx="28" width="114" x="53" y="48"></rect>
+<g class="seguito-eyes"><ellipse cx="83" cy="82" rx="11" ry="8"></ellipse><ellipse cx="137" cy="82" rx="11" ry="8"></ellipse></g>
+<path class="seguito-mouth serious-mouth" d="M91 106h38"></path><path class="seguito-mouth happy-mouth" d="M88 101c10 20 34 20 44 0"></path><path class="seguito-mouth worried-mouth" d="M90 112c10-15 30-15 40 0"></path>
+<rect class="seguito-body" fill="url(#seguitoBodyLogin)" height="43" rx="19" width="98" x="61" y="135"></rect><text text-anchor="middle" x="110" y="163">SEG</text>
+</svg>
+</div>
+<div class="login-heading">
+<p class="eyebrow">SEG VENDAS</p>
+<h1 id="loginTitle">Acesso ao sistema</h1>
+<p id="seguitoLoginMessage">Digite seu código ou usuário e sua senha.</p>
+</div>
+<form class="login-form" id="loginForm">
+<label>Código ou usuário
+          <input autocapitalize="none" autocomplete="username" id="loginUsername" placeholder="Ex.: 25 ou arilsonmoraes" required="" spellcheck="false"/>
+</label>
+<label>Senha
+          <div class="password-wrap">
+<input autocomplete="current-password" id="loginPassword" placeholder="Digite sua senha" required="" type="password"/>
+<button aria-label="Mostrar ou ocultar senha" id="toggleLoginPassword" title="Mostrar ou ocultar senha" type="button">◉</button>
+</div>
+</label>
+<button class="btn primary login-submit" id="loginSubmitBtn" type="submit">Entrar</button>
+<p class="login-error hidden" id="loginError" role="alert"></p>
+<div class="login-recovery-action"><button class="text-btn" id="openForgotPasswordBtn" type="button">Esqueci minha senha</button></div>
+</form>
+<div class="login-toggle">
+  <span>Ainda não possui acesso?</span>
+  <button class="text-btn" id="openRegisterBtn" type="button">Criar cadastro de cliente</button>
+</div>
+<details class="test-credentials">
+<summary>Primeiro acesso</summary>
+<div><b>Funcionários:</b> solicite a senha temporária ao responsável pelo sistema. No primeiro acesso será obrigatório criar uma senha pessoal com letras e números.</div>
+</details>
+<p class="login-footnote">Seu acesso e suas ações ficam registrados pelo sistema.</p>
+<div class="mobile-install-login"><button class="text-btn" id="installMobileLoginBtn" type="button">＋ Instalar no celular</button><span id="installMobileLoginStatus">Android e iPhone são compatíveis.</span></div>
+</div>
+</section>
+<section aria-labelledby="homeTitle" class="login-screen home-screen hidden" id="homeScreen">
+<div class="login-card modern-welcome home-card">
+<div aria-hidden="true" class="seguito-mascot happy" id="seguitoHome">
+<svg focusable="false" viewBox="0 0 220 190">
+<defs><linearGradient id="seguitoBodyHome" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#0b8050"></stop><stop offset="1" stop-color="#004d2b"></stop></linearGradient></defs>
+<path class="seguito-antenna" d="M110 28v-16"></path><circle class="seguito-light" cx="110" cy="10" r="7"></circle>
+<rect class="seguito-head" height="112" rx="38" width="144" x="38" y="32"></rect><rect class="seguito-face" height="78" rx="28" width="114" x="53" y="48"></rect>
+<g class="seguito-eyes"><ellipse cx="83" cy="82" rx="11" ry="8"></ellipse><ellipse cx="137" cy="82" rx="11" ry="8"></ellipse></g>
+<path class="seguito-mouth serious-mouth" d="M91 106h38"></path><path class="seguito-mouth happy-mouth" d="M88 101c10 20 34 20 44 0"></path><path class="seguito-mouth worried-mouth" d="M90 112c10-15 30-15 40 0"></path>
+<rect class="seguito-body" fill="url(#seguitoBodyHome)" height="43" rx="19" width="98" x="61" y="135"></rect><text text-anchor="middle" x="110" y="163">SEG</text>
+</svg>
+</div>
+<div class="login-heading">
+<p class="eyebrow">BEM-VINDO AO MUNDO DO SEGUITO</p>
+<h1 id="homeTitle">Onde você quer ir hoje?</h1>
+<p id="homeWelcomeMessage">Escolha uma opção para continuar.</p>
+</div>
+<section aria-label="Resumo rápido" class="home-summary" id="homeSummary">
+<div class="home-summary-item"><span class="home-summary-icon">▣</span><div><strong id="homeDraftCount">0</strong><small>rascunhos ativos</small></div></div>
+<div class="home-summary-item"><span class="home-summary-icon">✓</span><div><strong id="homeTodayCount">0</strong><small>orçamentos recentes</small></div></div>
+<div class="home-summary-item"><span class="home-summary-icon">●</span><div><strong id="homeConnectionLabel">Online</strong><small>status do sistema</small></div></div>
+</section>
+<button class="home-resume-btn hidden" id="homeResumeBtn" type="button"><span>↻</span><span><strong>Continuar orçamento</strong><small id="homeResumeText">Retomar o último rascunho salvo</small></span><b>→</b></button>
+<div class="quick-access-grid" id="quickAccessGrid">
+<button class="quick-access-btn staff-home-option" data-action="quote" type="button">
+<div class="btn-icon">📋</div><div class="btn-label">Novo Orçamento</div><div class="btn-desc">Criar orçamentos para clientes</div>
+</button>
+<button class="quick-access-btn" data-action="catalog" type="button">
+<div class="btn-icon">📦</div><div class="btn-label">Catálogo</div><div class="btn-desc">Buscar produtos e preços</div>
+</button>
+<button class="quick-access-btn" data-action="manuals" type="button">
+<div class="btn-icon">📚</div><div class="btn-label">Manuais</div><div class="btn-desc">Consultar documentação técnica</div>
+</button>
+<button class="quick-access-btn staff-home-option" data-action="clients" type="button">
+<div class="btn-icon">👥</div><div class="btn-label">Clientes</div><div class="btn-desc">Pesquisar a base de clientes</div>
+</button>
+</div>
+<section class="mobile-install-card" id="mobileInstallCard">
+<div class="mobile-install-copy"><strong>Levar o SEG Vendas para o celular</strong><span>Instale como aplicativo para abrir pela tela inicial, sem precisar procurar o endereço toda vez.</span></div>
+<button class="btn primary mobile-install-btn" id="installMobileBtn" type="button">Instalar no celular</button>
+<p aria-live="polite" class="mobile-install-status" id="installMobileStatus">No Android, o navegador poderá instalar automaticamente. No iPhone, use Compartilhar → Adicionar à Tela de Início.</p>
+</section>
+<button class="text-btn home-logout-btn" id="homeLogoutBtn" type="button">Sair deste usuário</button>
+</div>
+</section>
+<header class="app-header">
+<div class="brand-wrap">
+<img alt="SEG" class="brand-logo" id="appBrandLogo" src="assets/logo-seg.png"/>
+<div>
+<strong>SEG Vendas</strong>
+<span>Consulta e orçamento</span>
+</div>
+</div>
+<div class="header-actions">
+<div aria-label="Abrir minha foto de perfil" class="logged-user-chip hidden" id="loggedUserChip" role="button" tabindex="0" title="Alterar minha foto"><span id="loggedUserInitial">S<img alt="Foto do usuário" class="hidden" id="loggedUserAvatar"/></span><div><strong id="loggedUserName">Usuário</strong><small id="loggedUserRole">Perfil</small></div></div>
+<span class="status-dot" id="connectionStatus" title="Status da conexão"></span>
+<button aria-label="Voltar ao início" class="icon-btn hidden" id="homeBtn" title="Voltar ao início" type="button">⌂</button>
+<button aria-label="Trocar minha senha" class="icon-btn hidden" id="changePasswordBtn" title="Trocar minha senha" type="button">🔑</button>
+<button class="icon-btn hidden" id="installBtn" title="Instalar aplicativo" type="button">＋</button>
+<button class="icon-btn logout-btn hidden" id="logoutBtn" title="Sair" type="button">↪</button>
+</div>
+</header>
+<main class="app-main">
+<section class="page active" id="page-quote">
+<div class="page-title-row">
+<div>
+<p class="eyebrow">DOCUMENTO</p>
+<h1>Novo orçamento</h1>
+</div>
+<div class="quote-heading-meta"><span class="badge" id="quoteNumberBadge">Nº MA00001</span><span aria-live="polite" class="draft-status" id="quoteDraftStatus">Pronto</span></div>
+</div>
+<!-- Guided steps for quote -->
+<div aria-label="Etapas do orçamento" class="quote-guide" role="navigation">
+<div aria-controls="quote-step-panel-1" aria-current="step" aria-label="Abrir etapa 1: Dados do atendimento" class="guide-step active" data-step="1" role="button" tabindex="0">
+<div class="step-number">1</div>
+<div class="step-content">
+<h3>Dados do atendimento</h3>
+<p>Configure loja, vendedor e condições de pagamento</p>
+</div>
+</div>
+<div aria-controls="quote-step-panel-2" aria-label="Abrir etapa 2: Cliente" class="guide-step" data-step="2" role="button" tabindex="0">
+<div class="step-number">2</div>
+<div class="step-content">
+<h3>Cliente</h3>
+<p>Selecione ou cadastre o cliente</p>
+</div>
+</div>
+<div aria-controls="quote-step-panel-3" aria-label="Abrir etapa 3: Produtos" class="guide-step" data-step="3" role="button" tabindex="0">
+<div class="step-number">3</div>
+<div class="step-content">
+<h3>Produtos</h3>
+<p>Adicione os produtos ao orçamento</p>
+</div>
+</div>
+<div aria-controls="quote-step-panel-4" aria-label="Abrir etapa 4: Finalizar" class="guide-step" data-step="4" role="button" tabindex="0">
+<div class="step-number">4</div>
+<div class="step-content">
+<h3>Finalizar</h3>
+<p>Revise e gere o orçamento</p>
+</div>
+</div>
+</div><section aria-labelledby="quote-step-title-1" class="quote-step-panel active" data-quote-step-panel="1" id="quote-step-panel-1" tabindex="-1"><div class="quote-step-page-title"><div><p class="eyebrow">ETAPA 1 DE 4</p><h2 id="quote-step-title-1">Dados do atendimento</h2><p class="muted">Defina loja, vendedor, pagamento e validade.</p></div></div><div class="card">
+<div class="section-head">
+<h2>Dados do atendimento</h2>
+<span class="muted" id="quoteDateLabel"></span>
+</div>
+<div class="promotion-banner hidden" id="promotionBanner">
+<strong>Promoção Dia do Instalador</strong>
+<span>8% de desconto para vendedores, válido somente em 31/07/2026.</span>
+</div>
+<div class="form-grid two">
+<label>Loja
+            <select id="storeSelect"></select>
+</label>
+<label>Vendedor
+            <select id="sellerSelect"></select>
+<span class="field-meta"><span class="role-badge" id="sellerRoleBadge">Vendedor(a)</span></span>
+</label>
+<label>Condição de pagamento
+            <select id="paymentSelect">
+<option>À VISTA</option>
+<option>PIX</option>
+<option>DINHEIRO</option>
+<option>CARTÃO DE DÉBITO</option>
+<option>CARTÃO DE CRÉDITO</option>
+<option>BOLETO</option>
+<option>NEGOCIAR COM VENDEDOR</option>
+</select>
+</label>
+<label>Validade
+            <select id="validitySelect">
+<option value="1">1 dia</option>
+<option value="3">3 dias</option>
+<option selected="" value="7">7 dias</option>
+<option value="15">15 dias</option>
+</select>
+</label>
+</div>
+</div><div class="quote-step-navigation"><span class="quote-step-nav-spacer"></span><button class="btn primary quote-step-nav-btn" data-quote-next="2" type="button">Cliente →</button></div></section><section aria-labelledby="quote-step-title-2" class="quote-step-panel" data-quote-step-panel="2" id="quote-step-panel-2" tabindex="-1"><div class="quote-step-page-title"><div><p class="eyebrow">ETAPA 2 DE 4</p><h2 id="quote-step-title-2">Cliente</h2><p class="muted">Pesquise ou informe os dados do cliente.</p></div></div><div class="card">
+<div class="section-head"><h2>Cliente</h2><div class="section-inline-actions"><button class="text-btn" id="searchClientBtn" type="button">Pesquisar cliente</button><button class="text-btn" id="clearClientBtn" type="button">Limpar</button></div></div>
+<div class="form-grid two">
+<label class="span-2">Nome / Razão social
+            <input autocomplete="name" id="clientName" placeholder="Digite o nome do cliente"/>
+</label>
+<label>Código do cliente
+            <input id="clientCode" inputmode="numeric" placeholder="Opcional"/>
+</label>
+<label>CPF / CNPJ
+            <input id="clientDocument" inputmode="numeric" placeholder="Opcional"/>
+</label>
+<label>Telefone
+            <input autocomplete="tel" id="clientPhone" inputmode="tel" placeholder="(21) 99999-9999"/>
+</label>
+<label>Inscrição Estadual
+            <input id="clientIE" placeholder="ISENTO ou número"/>
+</label>
+<label class="span-2">Endereço
+            <input autocomplete="street-address" id="clientAddress" placeholder="Rua, número e complemento"/>
+</label>
+<label>Cidade
+            <input id="clientCity" value="RIO DE JANEIRO"/>
+</label>
+<label>UF
+            <input id="clientState" maxlength="2" value="RJ"/>
+</label>
+</div>
+<div class="notice info-notice" style="margin-top:12px">
+  <strong>Cadastro opcional.</strong> Você pode montar e enviar o orçamento sem preencher os dados do cliente.
+  <button class="text-btn" data-skip-client type="button" style="margin-left:4px">Continuar sem cadastro →</button>
+</div>
+</div><div class="quote-step-navigation"><button class="btn ghost quote-step-nav-btn" data-quote-prev="1" type="button">← Voltar</button><button class="btn primary quote-step-nav-btn" data-quote-next="3" type="button">Produtos →</button></div></section><section aria-labelledby="quote-step-title-3" class="quote-step-panel" data-quote-step-panel="3" id="quote-step-panel-3" tabindex="-1"><div class="quote-step-page-title"><div><p class="eyebrow">ETAPA 3 DE 4</p><h2 id="quote-step-title-3">Produtos</h2><p class="muted">Localize os produtos e monte a lista do orçamento.</p></div></div><div class="card product-picker-card">
+<div class="section-head">
+<div><h2>Adicionar produtos</h2><p class="muted">Pesquise por código ou descrição</p></div>
+<span class="product-count" id="productCountLabel">Carregando itens…</span>
+</div>
+<p class="visually-hidden" id="seguitoAssistantMessage">Olá! Eu sou o NestorX. Clique no avatar quando quiser uma dica.</p>
+<div class="search-wrap">
+<span>⌕</span>
+<input autocomplete="off" id="quoteSearchInput" placeholder="Ex.: 22713 ou câmera ColorVu, ou pergunte ao Nestor..." type="search"/>
+<button class="clear-search hidden" id="quoteSearchClear" type="button">×</button>
+</div>
+<div class="product-search-options" data-search-options="quote"><label>Linhas por página<select id="quoteSearchLimit"><option selected value="8">8 linhas</option><option value="16">16 linhas</option><option value="24">24 linhas</option><option value="32">32 linhas</option><option value="40">40 linhas</option><option value="50">50 linhas</option></select></label><button class="btn ghost product-search-visibility" id="quoteSearchVisibility" type="button">Ocultar resultados</button></div>
+<div aria-label="Pesquisar produto por imagem" class="visual-search-tools">
+<span class="visual-search-label">Pesquisar pelo código na imagem:</span>
+<label class="visual-search-button">📷 <span>Câmera</span><input accept="image/*" capture="environment" class="visually-hidden visual-search-input" data-search-status="quoteVisualSearchStatus" data-search-target="quoteSearchInput" type="file"/></label>
+<label class="visual-search-button">▧ <span>Álbum</span><input accept="image/*" class="visually-hidden visual-search-input" data-search-status="quoteVisualSearchStatus" data-search-target="quoteSearchInput" type="file"/></label>
+<p aria-live="polite" class="visual-search-status" id="quoteVisualSearchStatus" role="status"></p>
+</div>
+<div class="search-results empty-state compact" id="quoteSearchResults">
+          Digite ao menos 2 caracteres para pesquisar.
+        </div>
+</div><div class="card">
+<div class="section-head">
+<div><h2>Itens do orçamento</h2><p class="muted" id="cartCountLabel">Nenhum item</p></div>
+<button class="text-btn danger" id="clearCartBtn" type="button">Limpar itens</button>
+</div>
+<div class="cart-list empty-state" id="cartList">Adicione um produto para começar.</div>
+</div><div class="quote-step-navigation"><button class="btn ghost quote-step-nav-btn" data-quote-prev="2" type="button">← Voltar</button><button class="btn primary quote-step-nav-btn" data-quote-next="4" type="button">Finalizar →</button></div></section><section aria-labelledby="quote-step-title-4" class="quote-step-panel" data-quote-step-panel="4" id="quote-step-panel-4" tabindex="-1"><div class="quote-step-page-title"><div><p class="eyebrow">ETAPA 4 DE 4</p><h2 id="quote-step-title-4">Finalizar</h2><p class="muted">Confira valores, observações e gere o documento.</p></div></div><div class="card">
+<div class="form-grid two">
+<label>Desconto (%)
+            <input id="discountInput" inputmode="decimal" max="4" min="0" step="0.01" type="number" value="0"/>
+<span class="field-hint" id="discountPolicyHint">Vendedor: desconto máximo de 4%</span>
+</label>
+<label>Frete (R$)
+            <input id="freightInput" inputmode="decimal" type="text" value="0,00"/>
+</label>
+<label class="span-2">Observações
+            <textarea id="notesInput" placeholder="Informações adicionais do orçamento" rows="3"></textarea>
+</label>
+</div>
+<div class="totals-box">
+<div><span>Subtotal</span><strong id="subtotalValue">R$ 0,00</strong></div>
+<div><span>Desconto</span><strong id="discountValue">R$ 0,00</strong></div>
+<div><span>Frete</span><strong id="freightValue">R$ 0,00</strong></div>
+<div class="grand-total"><span>Total do orçamento</span><strong id="grandTotalValue">R$ 0,00</strong></div>
+</div>
+</div><div class="action-grid">
+<button class="btn primary span-2" id="sendQuoteModalBtn" type="button">Enviar orçamento</button>
+<button class="btn secondary" id="saveQuoteBtn" type="button">Salvar</button>
+<button class="btn primary" id="printQuoteBtn" type="button">Visualizar / Imprimir</button>
+<button class="btn whatsapp" id="sharePhotoBtn" type="button">Enviar como foto</button>
+<button class="btn whatsapp-dark" id="sharePdfBtn" type="button">Enviar PDF</button>
+<button class="btn ghost span-2" id="shareWhatsappBtn" type="button">Enviar resumo em texto</button>
+<button class="btn ghost span-2" id="newQuoteBtn" type="button">Começar novo orçamento</button>
+<button class="btn primary span-2" id="openDeliveryBtn" type="button">🚚 Fechar como entrega</button>
+</div><div class="quote-step-navigation"><button class="btn ghost quote-step-nav-btn" data-quote-prev="3" type="button">← Voltar</button></div></section>
+
+
+
+
+
+
+</section>
+<section class="page" id="page-products">
+<div class="page-title-row"><div><p class="eyebrow">CATÁLOGO INTERNO</p><h1>Consultar produtos</h1></div></div>
+<div class="card sticky-card">
+<div class="search-wrap">
+<span>⌕</span>
+<input autocomplete="off" id="catalogSearchInput" placeholder="Código ou descrição" type="search"/>
+<button class="clear-search hidden" id="catalogSearchClear" type="button">×</button>
+</div>
+<div class="product-search-options" data-search-options="catalog"><label>Linhas por página<select id="catalogSearchLimit"><option selected value="8">8 linhas</option><option value="16">16 linhas</option><option value="24">24 linhas</option><option value="32">32 linhas</option><option value="40">40 linhas</option><option value="50">50 linhas</option></select></label><button class="btn ghost product-search-visibility" id="catalogSearchVisibility" type="button">Ocultar resultados</button></div>
+<div aria-label="Pesquisar produto por imagem" class="visual-search-tools">
+<span class="visual-search-label">Pesquisar pelo código na imagem:</span>
+<label class="visual-search-button">📷 <span>Câmera</span><input accept="image/*" capture="environment" class="visually-hidden visual-search-input" data-search-status="catalogVisualSearchStatus" data-search-target="catalogSearchInput" type="file"/></label>
+<label class="visual-search-button">▧ <span>Álbum</span><input accept="image/*" class="visually-hidden visual-search-input" data-search-status="catalogVisualSearchStatus" data-search-target="catalogSearchInput" type="file"/></label>
+<p aria-live="polite" class="visual-search-status" id="catalogVisualSearchStatus" role="status"></p>
+</div>
+</div>
+<div class="catalog-results empty-state" id="catalogResults">Digite ao menos 2 caracteres para pesquisar.</div>
+</section>
+<section class="page role-hidden" id="page-assistant" hidden>
+<div class="page-title-row"><div><p class="eyebrow">ASSISTENTE SEG</p><h1>Conversa e orientação técnica</h1></div><span class="badge stable">Ativo</span></div>
+<div class="notice">
+        Converse sobre CFTV, alarmes, redes, fontes, controle de acesso e automatizadores. O assistente também pesquisa produtos e preços quando você pedir.
+      </div>
+<div class="chat-card">
+<div aria-live="polite" class="chat-messages" id="chatMessages">
+<div class="chat-message bot"><strong>Olá! Eu sou o assistente técnico SEG.</strong><br>Posso explicar conceitos, sugerir verificações, trazer curiosidades e também pesquisar o catálogo. Escolha um assunto abaixo ou escreva sua dúvida.</div>
+</div>
+<div aria-label="Sugestões para conversar" class="assistant-quick-prompts" id="assistantQuickPrompts"></div>
+<form class="chat-input-row" id="chatForm">
+<label class="visually-hidden" for="chatInput">Digite uma dúvida ou pedido</label>
+<input autocomplete="off" id="chatInput" maxlength="220" placeholder="Ex.: qual a diferença entre DVR e NVR?"/>
+<button aria-label="Enviar mensagem" class="send-btn" type="submit">➤</button>
+</form>
+</div>
+</section>
+<section class="page" id="page-support">
+<div class="page-title-row">
+<div><p class="eyebrow">CENTRAL TÉCNICA SEG</p><h1 id="supportPageTitle">Manuais e comunidade</h1></div>
+<span class="badge stable">Premium 5.9.13</span>
+</div>
+<div aria-label="Central técnica" class="support-tabs" role="tablist">
+<button class="support-tab active" data-support-tab="manuals" id="manualsTabBtn" type="button">▣ Manuais</button>
+<button class="support-tab" data-support-tab="forum" id="forumTabBtn" type="button">☵ Fórum</button>
+</div>
+<div class="support-panel active" id="support-manuals">
+<div class="notice info-notice">
+          A busca prioriza a Central de Ajuda SEG. Quando necessário, use as fontes oficiais complementares dos fabricantes. Resultados da comunidade permanecem separados.
+        </div>
+<div class="card sticky-card support-search-card">
+<div class="search-wrap">
+<span>⌕</span>
+<input autocomplete="off" id="manualSearchInput" placeholder="Ex.: 22713, ColorVu, automatizador" type="search"/>
+<button class="clear-search hidden" id="manualSearchClear" type="button">×</button>
+</div>
+<div class="manual-filter-row">
+<select aria-label="Filtrar categoria" id="manualCategoryFilter">
+<option value="">Todas as categorias</option>
+<option>Automatizadores</option>
+<option>CFTV</option>
+<option>Controle de acesso</option>
+<option>Alarmes e sensores</option>
+<option>Fontes e nobreaks</option>
+<option>Interfonia e fechaduras</option>
+<option>Outros</option>
+</select>
+<button class="btn secondary compact-btn" id="showAllManualsBtn" type="button">Ver cadastrados</button>
+<button class="btn primary compact-btn hidden" id="manageManualsBtn" type="button">＋ Cadastrar manual</button>
+</div>
+</div>
+<div class="card official-sources-card">
+<div class="section-head">
+<div><h2>Pesquisa em fontes oficiais</h2><p class="muted">Ordem recomendada: SEG Ajuda → fabricante → fórum → atendimento humano.</p></div>
+</div>
+<div class="official-source-priority">
+<button class="source-button primary-source" id="searchSegHelpBtn" type="button"><strong>1. Pesquisar no SEG Ajuda</strong><span>Resultados aparecem dentro do aplicativo</span></button>
+<button class="source-button" id="openSegHelpSiteBtn" type="button"><strong>Abrir Central de Ajuda SEG</strong><span>Alternativa no navegador</span></button>
+<button class="source-button" id="searchHikvisionBtn" type="button"><strong>Hikvision Brasil</strong><span>CFTV e controle de acesso</span></button>
+<button class="source-button" id="searchJflBtn" type="button"><strong>JFL Alarmes</strong><span>Alarmes, sensores e CFTV</span></button>
+<button class="source-button" id="searchIpecBtn" type="button"><strong>IPEC</strong><span>Automação e segurança</span></button>
+<button class="source-button" id="searchGarenBtn" type="button"><strong>Garen</strong><span>Automatizadores e controle de acesso</span></button>
+</div>
+<button class="btn whatsapp support-human-btn" id="supportWhatsappBtn" type="button">Não resolveu? Falar com a SEG</button>
+<p class="source-query-hint" id="officialSourceHint">Digite uma pesquisa acima. O SEG Ajuda é sempre a primeira fonte.</p>
+</div>
+<div class="official-results empty-state compact" id="segHelpResults">Use o botão “Pesquisar no SEG Ajuda” para trazer artigos oficiais para esta tela.</div>
+<div class="section-divider"><span>Manuais cadastrados e produtos</span></div>
+<div class="manual-results empty-state" id="manualResults">
+          Digite ao menos 2 caracteres para procurar um manual ou produto.
+        </div>
+</div>
+<div class="support-panel" id="support-forum">
+<div class="notice forum-notice">
+          Fórum comunitário local para testes. O perfil identifica quem escreveu a mensagem, mas somente coordenadores podem publicar com o selo Oficial SEG. Respostas da comunidade não substituem manuais oficiais.
+        </div>
+<div class="forum-toolbar">
+<div class="search-wrap forum-search">
+<span>⌕</span>
+<input autocomplete="off" id="forumSearchInput" placeholder="Pesquisar tópicos" type="search"/>
+<button class="clear-search hidden" id="forumSearchClear" type="button">×</button>
+</div>
+<button class="btn primary" id="newTopicBtn" type="button">＋ Nova dúvida</button>
+</div>
+<div class="card hidden" id="newTopicCard">
+<div class="section-head"><div><h2>Publicar nova dúvida</h2><p class="muted">Não informe senhas, documentos ou dados privados do cliente.</p></div><button class="text-btn" id="cancelTopicBtn" type="button">Cancelar</button></div>
+<form class="form-grid two" id="newTopicForm">
+<label>Seu nome
+              <input id="forumAuthorName" maxlength="60" placeholder="Nome visível no fórum" required=""/>
+</label>
+<label>Perfil
+<select id="forumAuthorRole">
+<option>Instalador</option>
+<option>Cliente</option>
+<option>Colaborador SEG</option>
+<option>Vendedor SEG</option>
+<option>Coordenador SEG</option>
+<option>Suporte técnico SEG</option>
+<option>Financeiro SEG</option>
+<option>Técnico / integrador</option>
+<option>Revendedor / parceiro</option>
+<option>Outro</option>
+</select>
+</label>
+<label>Categoria
+              <select id="forumTopicCategory">
+<option>Instalação</option>
+<option>Configuração</option>
+<option>Defeito / diagnóstico</option>
+<option>Compatibilidade</option>
+<option>Solicitação de manual</option>
+<option>Orçamento e produto</option>
+<option>Outros</option>
+</select>
+</label>
+<label>Código ou modelo
+              <input id="forumTopicModel" maxlength="80" placeholder="Opcional"/>
+</label>
+<label class="span-2">Título da dúvida
+              <input id="forumTopicTitle" maxlength="120" placeholder="Resuma a dúvida em uma frase" required=""/>
+</label>
+<label class="span-2">Detalhes
+              <textarea id="forumTopicBody" maxlength="2000" placeholder="Informe o equipamento, sintomas, testes já realizados e o que precisa descobrir." required="" rows="5"></textarea>
+</label>
+<button class="btn primary span-2" type="submit">Publicar dúvida</button>
+</form>
+</div>
+<div class="forum-filter-row">
+<select aria-label="Filtrar tópicos por categoria" id="forumCategoryFilter">
+<option value="">Todas as categorias</option>
+<option>Instalação</option>
+<option>Configuração</option>
+<option>Defeito / diagnóstico</option>
+<option>Compatibilidade</option>
+<option>Solicitação de manual</option>
+<option>Orçamento e produto</option>
+<option>Outros</option>
+</select>
+<select aria-label="Filtrar tópicos por situação" id="forumStatusFilter">
+<option value="">Todos</option>
+<option value="open">Em aberto</option>
+<option value="solved">Resolvidos</option>
+</select>
+</div>
+<div class="forum-list" id="forumList"></div>
+</div>
+</section>
+<section class="page" id="page-history">
+<div class="page-title-row"><div><p class="eyebrow">PEDIDOS PRESERVADOS NO SISTEMA</p><h1>Histórico</h1></div><div class="section-inline-actions"><button class="text-btn" id="exportHistoryCsvBtn" type="button">Exportar CSV</button><button class="text-btn" id="exportHistoryBtn" type="button">Exportar</button></div></div>
+<div class="card history-model-card"><div><h2>Pedidos modelos</h2><p class="muted">Crie listas prontas a partir de um pedido salvo e reutilize sempre que precisar. Somente administradores podem excluir modelos.</p></div><button class="btn primary" id="openHistoryQuoteTemplatesBtn" type="button">Criar ou reutilizar modelo</button></div>
+<div class="card history-filter-card">
+<div class="section-head"><div><h2>Filtrar histórico</h2><p class="muted" id="historyFilterSummary">Combine os campos para localizar um registro.</p></div><button class="text-btn" id="clearHistoryFiltersBtn" type="button">Limpar filtros</button></div>
+<div class="form-grid history-filter-grid">
+<label>Vendedor<select id="historySellerFilter"><option value="">Todos</option></select></label>
+<label>Situação<select id="historyStatusFilter"><option value="">Todas</option><option value="quote">Orçamento</option><option value="delivery">Entrega</option><option value="sale">Venda</option></select></label>
+<label>Cliente<input autocomplete="off" id="historyClientFilter" placeholder="Nome, CPF ou CNPJ" type="search"/></label>
+<label>Nº do orçamento<input autocomplete="off" id="historyNumberFilter" inputmode="numeric" placeholder="Ex.: 2408" type="search"/></label>
+<label>Produto (código ou descrição)<input autocomplete="off" id="historyProductFilter" placeholder="Ex.: 22713 ou câmera" type="search"/></label>
+<label>Data inicial<input id="historyStartDateFilter" type="date"/></label>
+<label>Data final<input id="historyEndDateFilter" type="date"/></label>
+<label>Hora inicial<input id="historyStartTimeFilter" type="time"/></label>
+<label>Hora final<input id="historyEndTimeFilter" type="time"/></label>
+<label>Valor mínimo (R$)<input id="historyMinValueFilter" inputmode="decimal" placeholder="0,00" type="text"/></label>
+<label>Valor máximo (R$)<input id="historyMaxValueFilter" inputmode="decimal" placeholder="0,00" type="text"/></label>
+</div>
+</div>
+<div class="history-list empty-state" id="historyList">Nenhum orçamento salvo.</div>
+</section>
+<section class="page" id="page-settings">
+<div class="page-title-row"><div><p class="eyebrow">CONFIGURAÇÕES</p><h1>Aplicativo</h1></div></div>
+<div class="card logo-settings-card">
+<div class="section-head">
+<div><h2>Logo do aplicativo e orçamento</h2><p class="muted">Escolha uma das logos ou carregue uma imagem própria.</p></div>
+</div>
+<div class="logo-settings-grid">
+<div class="logo-preview-box"><img alt="Prévia da logo" id="logoPreview" src="assets/logo-seg.png"/></div>
+<div class="form-grid">
+<label>Logo
+              <select id="logoChoiceSelect">
+<option value="standard">SEG padrão (anterior)</option>
+<option value="international">SEG International clássica</option>
+<option value="technological">SEG tecnológica</option>
+<option value="custom">Imagem personalizada</option>
+</select>
+</label>
+<label class="hidden" id="customLogoLabel">Enviar imagem PNG ou JPG
+              <input accept="image/png,image/jpeg,image/webp" id="customLogoInput" type="file"/>
+</label>
+<button class="btn secondary" id="resetLogoBtn" type="button">Restaurar logo padrão</button>
+</div>
+</div>
+</div>
+<div class="card">
+<h2>Dados da SEG no orçamento</h2>
+<div class="form-grid">
+<label>Site
+            <input id="companySite" value="WWW.SEGBR.COM.BR"/>
+</label>
+<label class="span-2">Telefones / rodapé
+            <textarea id="companyPhones" rows="8"></textarea>
+</label>
+<button class="btn primary" id="saveSettingsBtn" type="button">Salvar configurações</button>
+</div>
+</div>
+<div class="card" id="photoPermissionCard">
+<div class="section-head">
+<div><h2>Fotos dos produtos</h2><p class="muted">Clientes e vendedores visualizam. Somente coordenadores podem editar e consultar o relatório.</p></div>
+<span class="role-badge" id="photoPermissionBadge">Somente visualização</span>
+</div>
+<p class="permission-copy" id="photoPermissionText"></p>
+</div>
+<div class="card admin-only hidden" id="productCategoryAdminCard">
+<div class="section-head"><div><h2>Categorias de produtos</h2><p class="muted">Administradores podem criar categorias e alterar a categoria sugerida de cada produto.</p></div><span class="role-badge">Somente administradores</span></div>
+<div class="form-grid two">
+<label>Produto (código ou descrição)<input autocomplete="off" id="productCategoryProductInput" list="productCategoryProductOptions" placeholder="Ex.: 22713 ou motor deslizante" type="search"/><datalist id="productCategoryProductOptions"></datalist></label>
+<label>Categoria do produto<select id="productCategorySelect"></select></label>
+<button class="btn primary" id="saveProductCategoryBtn" type="button">Salvar categoria do produto</button>
+<div class="form-grid"><label>Nova categoria<input id="newProductCategoryInput" maxlength="80" placeholder="Ex.: Motores deslizantes" type="text"/></label><button class="btn secondary" id="createProductCategoryBtn" type="button">Criar categoria</button></div>
+</div>
+<p aria-live="polite" class="permission-copy" id="productCategoryStatus">Carregando categorias do catálogo…</p>
+</div>
+<div class="card hidden" id="photoAuditCard">
+<div class="section-head">
+<div><h2>Relatório de edição de fotos</h2><p class="muted">Acesso exclusivo de coordenadores.</p></div>
+<button class="text-btn" id="exportPhotoAuditBtn" type="button">Exportar CSV</button>
+</div>
+<div class="audit-list empty-state compact" id="photoAuditList">Nenhuma alteração registrada.</div>
+</div>
+<div class="card hidden" id="manualAuditCard">
+<div class="section-head">
+<div><h2>Relatório de edição de manuais</h2><p class="muted">Cadastro, alteração, substituição de PDF e exclusão. Acesso exclusivo de coordenadores.</p></div>
+</div>
+<div class="audit-list empty-state compact" id="manualAuditList">Nenhuma alteração de manual registrada.</div>
+</div>
+<div class="card coordinator-only hidden" id="photoDirectoryCard">
+<div class="section-head">
+<div><h2>Diretório central de fotos</h2><p class="muted">Copie imagens para <code>data\fotos_produtos</code> usando o código do produto como nome.</p></div>
+<button class="btn secondary compact-btn" id="refreshPhotoDirectoryBtn" type="button">Atualizar catálogo</button>
+</div>
+<p class="permission-copy" id="photoDirectoryStatus">O aplicativo também verifica essa pasta automaticamente.</p>
+</div>
+<div class="card coordinator-only hidden" id="clientImportCard">
+<div class="section-head">
+<div><h2>Base de clientes</h2><p class="muted">Área exclusiva para atualizar a planilha de clientes.</p></div>
+</div>
+<div class="client-import-row">
+<label class="btn secondary file-button">Selecionar planilha<input accept=".csv,.xls,.xlsx,text/csv" class="visually-hidden" id="clientCsvInput" type="file"/></label>
+<button class="btn primary" disabled="" id="importClientsBtn" type="button">Importar clientes</button>
+</div>
+<div class="card coordinator-only hidden" id="employeeImportCard">
+<div class="section-head"><div><h2>Base de funcionários</h2><p class="muted">Área separada para atualizar os acessos dos funcionários. Senhas alteradas são preservadas.</p></div></div>
+<div class="client-import-row">
+<label class="btn secondary file-button">Selecionar planilha<input accept=".csv,.xls,.xlsx,text/csv" class="visually-hidden" id="employeeFileInput" type="file"/></label>
+<button class="btn primary" disabled id="importEmployeesBtn" type="button">Importar funcionários</button>
+</div>
+<p class="permission-copy" id="employeeImportStatus">Nenhum arquivo selecionado.</p>
+</div>
+<p class="permission-copy" id="clientImportStatus">Nenhum arquivo selecionado.</p>
+<div class="audit-list empty-state compact" id="clientImportAudit">Nenhuma importação registrada.</div>
+</div>
+<div class="card admin-only hidden" id="accessRequestsCard">
+<div class="section-head">
+<div><h2>Solicitações de acesso de clientes</h2><p class="muted">Cadastros cujo CPF ou CNPJ ainda não está na base aguardam sua autorização.</p></div>
+<button class="btn secondary compact-btn" id="refreshAccessRequestsBtn" type="button">Atualizar</button>
+</div>
+<div class="audit-list empty-state compact" id="accessRequestsList">Nenhuma solicitação aguardando aprovação.</div>
+</div>
+<div class="card admin-only hidden" id="passwordResetRequestsCard">
+<div class="section-head">
+<div><h2>Pedidos de recuperação de senha</h2><p class="muted">Funcionários que clicaram em “Esqueci minha senha” aguardam sua autorização. A aprovação restaura somente a senha desse funcionário para <strong>SEG@código</strong>.</p></div>
+<button class="btn secondary compact-btn" id="refreshPasswordResetRequestsBtn" type="button">Atualizar</button>
+</div>
+<div class="audit-list empty-state compact" id="passwordResetRequestsList">Nenhum pedido de recuperação aguardando aprovação.</div>
+</div>
+<div class="card warning-card">
+<h2>Importante</h2>
+<p>Versão 5.9.13 do projeto principal. A pesquisa é paginada, tolera erros de digitação e pode ser filtrada por categoria; administradores gerenciam as categorias. O avatar inteiro é clicável para abrir as funções de ajuda, e “Ver no orçamento” leva diretamente aos itens editáveis. A cesta e a ajuda do NestorX usam áreas seguras, o movimento não tem mais o efeito de tremor e o tamanho pode ser escolhido entre Pequeno, Médio e Grande. Agora também é possível instalar o sistema no celular e usar o ícone SEG nos atalhos do Windows. Cada filial recebe uma numeração própria para os orçamentos (por exemplo, Oeste: <strong>OE00022</strong>), inclusive no modo offline. O servidor possui preparação Docker para nuvem, rota de saúde, conector Dataplace por segredo de ambiente e fila offline idempotente. A documentação da estrutura está em <strong>docs/ESTRUTURA_E_FUNCOES.md</strong>. IP, porta e endereço público podem ser definidos em <strong>CONFIGURAR_REDE_BETA.bat</strong>. Para acesso externo, use preferencialmente túnel HTTPS com vendedores autorizados.</p>
+</div>
+</section>
+</main>
+<div aria-labelledby="manualManagerTitle" aria-modal="true" class="modal hidden" id="manualManagerModal" role="dialog">
+<div class="modal-backdrop" data-close-modal="manualManagerModal"></div>
+<div class="modal-sheet manual-manager-sheet">
+<div class="modal-head">
+<div><p class="eyebrow">BIBLIOTECA TÉCNICA</p><h2 id="manualManagerTitle">Cadastrar manual</h2></div>
+<button class="modal-close" data-close-modal="manualManagerModal" type="button">×</button>
+</div>
+<div class="notice coordinator-notice">Somente coordenadores podem cadastrar, editar ou excluir manuais nesta versão de teste.</div>
+<form class="form-grid two" id="manualForm">
+<label class="span-2">Título do manual
+          <input id="manualTitle" maxlength="180" placeholder="Ex.: Manual Central Wave Connect" required=""/>
+</label>
+<label>Código do produto
+          <input id="manualCode" maxlength="60" placeholder="Opcional"/>
+</label>
+<label>Marca
+          <input id="manualBrand" maxlength="80" required="" value="SEG"/>
+</label>
+<label class="span-2">Modelo(s)
+          <input id="manualModels" maxlength="220" placeholder="Ex.: Central Wave, Wave Connect"/>
+</label>
+<label>Categoria
+          <select id="manualCategory">
+<option>Automatizadores</option>
+<option>CFTV</option>
+<option>Controle de acesso</option>
+<option>Alarmes e sensores</option>
+<option>Fontes e nobreaks</option>
+<option>Interfonia e fechaduras</option>
+<option>Outros</option>
+</select>
+</label>
+<label>Visibilidade
+          <select id="manualVisibility">
+<option value="public">Público — poderá aparecer para clientes</option>
+<option value="internal">Interno — somente funcionários</option>
+</select>
+</label>
+<label class="span-2">Descrição
+          <textarea id="manualDescription" maxlength="900" placeholder="Resumo do conteúdo do documento" rows="3"></textarea>
+</label>
+<label class="span-2 manual-file-label">Arquivo PDF
+          <input accept="application/pdf,.pdf" id="manualPdfInput" type="file"/>
+<span class="field-hint" id="manualCurrentFile">Selecione um PDF de até 20 MB.</span>
+</label>
+<label class="official-check span-2"><input checked="" id="manualApproved" type="checkbox"/> Marcar como aprovado pela SEG</label>
+<div class="manual-form-actions span-2">
+<button class="btn danger-outline hidden" id="deleteManualFromModalBtn" type="button">Excluir manual</button>
+<button class="btn primary" id="saveManualBtn" type="submit">Salvar manual</button>
+</div>
+</form>
+</div>
+</div>
+<div aria-labelledby="clientSearchTitle" aria-modal="true" class="modal hidden" id="clientSearchModal" role="dialog">
+<div class="modal-backdrop" data-close-modal="clientSearchModal"></div>
+<div class="modal-sheet client-search-sheet">
+<div class="modal-head">
+<div><p class="eyebrow">BASE INTERNA</p><h2 id="clientSearchTitle">Pesquisar cliente</h2></div>
+<button class="modal-close" data-close-modal="clientSearchModal" type="button">×</button>
+</div>
+<div class="search-wrap"><span>⌕</span><input autocomplete="off" id="clientSearchInput" placeholder="Nome, código, CPF/CNPJ ou telefone" type="search"/><button class="clear-search hidden" id="clientSearchClear" type="button">×</button></div>
+<p class="modal-help">A lista de clientes é exclusiva para funcionários. Digite pelo menos 2 caracteres.</p>
+<div class="client-search-results empty-state compact" id="clientSearchResults">Digite para pesquisar.</div>
+</div>
+</div>
+<div aria-labelledby="salesContactTitle" aria-modal="true" class="modal hidden" id="salesContactModal" role="dialog">
+<div class="modal-backdrop" data-close-modal="salesContactModal"></div>
+<div class="modal-sheet">
+<div class="modal-head">
+<div><p class="eyebrow">ATENDIMENTO COMERCIAL</p><h2 id="salesContactTitle">Falar com um vendedor</h2></div>
+<button class="modal-close" data-close-modal="salesContactModal" type="button">×</button>
+</div>
+<div class="sales-product-summary" id="salesProductSummary"></div>
+<div class="form-grid two">
+<label>Seu nome
+          <input id="salesClientName" placeholder="Nome do cliente"/>
+</label>
+<label>Quantidade desejada
+          <input id="salesQuantity" inputmode="numeric" min="1" step="1" type="number" value="1"/>
+</label>
+<label>Loja
+          <select id="salesStoreSelect"></select>
+</label>
+<label>Vendedor / atendimento
+          <select id="salesSellerSelect"></select>
+</label>
+</div>
+<button class="btn whatsapp modal-primary" id="openSellerWhatsappBtn" type="button">Abrir WhatsApp</button>
+<p class="modal-help">Nas lojas sem WhatsApp individual cadastrado, a mensagem será enviada ao atendimento central da SEG: (21) 3081-8100.</p>
+</div>
+</div>
+<div aria-labelledby="sendQuoteTitle" aria-modal="true" class="modal hidden" id="sendQuoteModal" role="dialog">
+<div class="modal-backdrop" data-close-modal="sendQuoteModal"></div>
+<div class="modal-sheet">
+<div class="modal-head">
+<div><p class="eyebrow">ENVIO RÁPIDO</p><h2 id="sendQuoteTitle">Enviar orçamento</h2></div>
+<button class="modal-close" data-close-modal="sendQuoteModal" type="button">×</button>
+</div>
+<p class="notice info-notice">O cliente não precisa estar cadastrado. Preencha apenas o canal escolhido.</p>
+<div class="form-grid">
+<label>Nome do cliente (opcional)
+          <input id="sendQuoteClientName" placeholder="Cliente não informado"/>
+</label>
+<label>WhatsApp do destinatário
+          <input id="sendQuoteWhatsapp" inputmode="tel" placeholder="5511999999999 (com DDI e DDD)"/>
+</label>
+<label>E-mail do destinatário
+          <input id="sendQuoteEmail" inputmode="email" type="email" placeholder="cliente@exemplo.com"/>
+</label>
+<label>Formato
+          <select id="sendQuoteFormat">
+<option value="text">Resumo em texto</option>
+<option value="pdf">PDF</option>
+<option value="photo">Imagem</option>
+</select>
+</label>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
+<button class="btn whatsapp" id="sendQuoteWhatsappBtn" type="button">Enviar pelo WhatsApp</button>
+<button class="btn email" id="sendQuoteEmailBtn" type="button">Enviar por e-mail</button>
+</div>
+<p class="modal-help">Se escolher PDF ou Imagem, o arquivo será gerado e anexado automaticamente quando o dispositivo permitir; caso contrário, ele será baixado para você anexar manualmente.</p>
+</div>
+</div>
+<div aria-labelledby="productPhotoTitle" aria-modal="true" class="modal hidden" id="productPhotoModal" role="dialog">
+<div class="modal-backdrop" data-close-modal="productPhotoModal"></div>
+<div class="modal-sheet photo-modal-sheet">
+<div class="modal-head">
+<div><p class="eyebrow">FOTO DO PRODUTO</p><h2 id="productPhotoTitle">Visualizar foto</h2></div>
+<button class="modal-close" data-close-modal="productPhotoModal" type="button">×</button>
+</div>
+<div class="photo-preview-stage"><img alt="Foto do produto" id="productPhotoPreview"/><div class="photo-empty-state hidden" id="productPhotoEmpty">Sem foto cadastrada</div></div>
+<div class="sales-product-summary" id="productPhotoSummary"></div>
+<div class="photo-coordinator-actions hidden" id="photoCoordinatorActions">
+<label class="btn primary photo-upload-label">📷 Tirar foto
+          <input accept="image/jpeg,image/png,image/webp" capture="environment" class="visually-hidden" id="photoCameraInput" type="file"/>
+</label>
+<label class="btn secondary photo-upload-label">🖼 Escolher do álbum
+          <input accept="image/jpeg,image/png,image/webp" class="visually-hidden" id="photoFileInput" type="file"/>
+</label>
+<button class="btn danger-outline" id="removeProductPhotoBtn" type="button">Remover foto</button>
+</div>
+<p class="modal-help" id="photoModalHelp">Apenas visualização.</p>
+</div>
+</div>
+<div aria-labelledby="registerTitle" aria-modal="true" class="modal hidden" id="registerModal" role="dialog">
+<div class="modal-backdrop" data-close-modal="registerModal"></div>
+<div class="modal-sheet register-modal-sheet">
+<div class="modal-head">
+<div><p class="eyebrow">NOVO ACESSO</p><h2 id="registerTitle">Criar cadastro de cliente</h2><p class="muted">O cadastro criado aqui terá acesso somente ao Catálogo e aos Manuais públicos.</p></div>
+<button aria-label="Fechar" class="modal-close" data-close-modal="registerModal" type="button">×</button>
+</div>
+<form class="login-form" id="registerForm">
+<label>Nome completo ou razão social
+<input autocomplete="name" id="registerName" maxlength="120" placeholder="Digite o nome" required=""/>
+</label>
+<div class="register-grid">
+<label>CPF ou CNPJ
+<input autocomplete="off" id="registerDocument" inputmode="numeric" maxlength="20" placeholder="Obrigatório para validar o cliente" required=""/>
+</label>
+<label>Telefone / WhatsApp
+<input autocomplete="tel" id="registerPhone" inputmode="tel" maxlength="30" placeholder="(21) 99999-9999"/>
+</label>
+</div>
+<label>E-mail
+<input autocomplete="email" id="registerEmail" maxlength="140" placeholder="nome@empresa.com.br" type="email"/>
+</label>
+<label>Usuário para entrar
+<input autocapitalize="none" autocomplete="username" id="registerUsername" maxlength="80" minlength="4" placeholder="Ex.: joaosilva" required="" spellcheck="false"/>
+</label>
+<div class="register-grid">
+<label>Senha
+<input autocomplete="new-password" id="registerPassword" minlength="8" required="" type="password"/>
+</label>
+<label>Confirmar senha
+<input autocomplete="new-password" id="registerPasswordConfirm" minlength="8" required="" type="password"/>
+</label>
+</div>
+<label class="register-consent"><input id="registerConsent" required="" type="checkbox"/> <span>Confirmo que os dados informados são verdadeiros e autorizo seu uso para atendimento pela SEG.</span></label>
+<p class="login-error hidden" id="registerError" role="alert"></p>
+<button class="btn primary" id="registerSubmitBtn" type="submit">Criar meu cadastro</button>
+</form>
+<p class="modal-help">Contas de funcionário, caixa, coordenador, financeiro ou instalador continuam sendo criadas e autorizadas internamente pela SEG.</p>
+</div>
+</div>
+<div aria-labelledby="forgotPasswordTitle" aria-modal="true" class="modal hidden" id="forgotPasswordModal" role="dialog">
+<div class="modal-backdrop" data-close-modal="forgotPasswordModal"></div>
+<div class="modal-sheet password-modal-sheet">
+<div class="modal-head">
+<div><p class="eyebrow">RECUPERAR ACESSO</p><h2 id="forgotPasswordTitle">Esqueci minha senha</h2><p class="muted">Envie um pedido ao servidor local. Um administrador precisará autorizar a restauração.</p></div>
+<button aria-label="Fechar" class="modal-close" data-close-modal="forgotPasswordModal" type="button">×</button>
+</div>
+<form class="login-form" id="forgotPasswordForm">
+<label>Código ou usuário do funcionário
+<input autocapitalize="none" autocomplete="username" id="forgotPasswordUsername" maxlength="80" required="" spellcheck="false"/>
+</label>
+<p class="recovery-status is-ready" id="forgotPasswordStatus" role="status">Depois da aprovação, entre com seu código e a senha de fábrica SEG@código.</p>
+<p class="login-error hidden" id="forgotPasswordError" role="alert"></p>
+<button class="btn primary" id="forgotPasswordSubmit" type="submit">Enviar pedido de recuperação</button>
+</form>
+<p class="modal-help">A senha não é enviada pela tela. O servidor registra somente o pedido para o administrador. Futuramente este fluxo poderá enviar a confirmação por e-mail ou WhatsApp.</p>
+</div>
+</div>
+<div aria-labelledby="changePasswordTitle" aria-modal="true" class="modal hidden" id="changePasswordModal" role="dialog">
+<div class="modal-backdrop" data-close-modal="changePasswordModal"></div>
+<div class="modal-sheet password-modal-sheet">
+<div class="modal-head">
+<div><p class="eyebrow">SEGURANÇA</p><h2 id="changePasswordTitle">Trocar minha senha</h2></div>
+<button class="modal-close" data-close-modal="changePasswordModal" type="button">×</button>
+</div>
+<form class="login-form" id="changePasswordForm">
+<label>Senha atual
+          <input autocomplete="current-password" id="currentPassword" required="" type="password"/>
+</label>
+<label>Nova senha
+          <input autocomplete="new-password" id="newPassword" minlength="8" required="" type="password"/>
+</label>
+<label>Confirmar nova senha
+          <input autocomplete="new-password" id="confirmNewPassword" minlength="8" required="" type="password"/>
+</label>
+<p class="login-error hidden" id="changePasswordError" role="alert"></p>
+<button class="btn primary" id="savePasswordBtn" type="submit">Salvar nova senha</button>
+</form>
+</div>
+</div>
+<aside class="seguito-dock nestorx-roamer hidden" id="seguitoDock">
+<div class="nestorx-mover" id="nestorxMover">
+<button aria-controls="seguitoTip" aria-expanded="false" aria-label="Abrir funções do NestorX; arraste para mover" class="nestorx-avatar-button" id="seguitoDockButton" title="Abrir funções do NestorX — arraste para mover" type="button"><picture class="nestorx-picture"><source srcset="assets/nestorx-fullbody.webp" type="image/webp"/><img alt="NestorX" class="nestorx-figure" decoding="async" height="1623" src="assets/nestorx-fullbody.png" width="559"/></picture></button>
+<section aria-describedby="seguitoTipText nestorxHelpFeedback" aria-labelledby="nestorxTipTitle" class="seguito-tip nestorx-tip hidden" id="seguitoTip" role="dialog">
+<button aria-label="Fechar ajuda do NestorX" id="closeSeguitoTip" title="Fechar" type="button">×</button><strong id="nestorxTipTitle">NestorX</strong><p id="seguitoTipText">Como posso ajudar?</p>
+<form class="nestorx-help-form" id="nestorxHelpForm"><label class="visually-hidden" for="nestorxHelpInput">O que você deseja encontrar?</label><div class="nestorx-help-row"><input autocomplete="off" id="nestorxHelpInput" maxlength="160" minlength="2" placeholder="Ex.: manual, cliente ou câmera" type="search"/><button aria-label="Enviar pergunta" class="nestorx-help-send" title="Enviar pergunta" type="submit">➜</button></div></form>
+<p aria-live="polite" class="nestorx-help-feedback hidden" id="nestorxHelpFeedback" role="status"></p><p class="nestorx-motion-status hidden" id="nestorxMotionStatus" role="status"></p>
+<div aria-label="Controles do NestorX" class="nestorx-tip-actions" role="group"><button aria-label="Pausar movimento do NestorX" class="nestorx-icon-action" id="nestorxPauseButton" title="Pausar movimento" type="button"><span aria-hidden="true" id="nestorxPauseGlyph">⏸</span></button><button aria-label="Ocultar NestorX" class="nestorx-icon-action" id="nestorxHideButton" title="Ocultar NestorX" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 4.2A10.8 10.8 0 0 1 12 4c5.2 0 8.6 4.5 9.5 6a2 2 0 0 1 0 2 16 16 0 0 1-2.2 2.8M6.6 6.5A16.7 16.7 0 0 0 2.5 10a2 2 0 0 0 0 2c.9 1.5 4.3 6 9.5 6 1 0 2-.2 2.9-.5"/></svg></button></div>
+</section>
+<button aria-label="Mostrar NestorX" class="nestorx-restore-button hidden" id="nestorxRestoreButton" title="Mostrar NestorX" type="button">💡</button>
+</div>
+</aside>
+<aside class="avatar-basket-thought hidden" id="floatingBasket" aria-label="Pensamento do NestorX sobre a cesta">
+<span aria-hidden="true" class="avatar-thought-dot avatar-thought-dot-small"></span><span aria-hidden="true" class="avatar-thought-dot avatar-thought-dot-large"></span>
+<section class="floating-basket-panel hidden" id="floatingBasketPanel" aria-label="Produtos que o NestorX está conferindo">
+<div class="floating-basket-head"><div><strong>O NestorX está conferindo…</strong><span id="floatingBasketSummary">Nenhum produto adicionado</span></div><button aria-label="Fechar pensamento" class="floating-basket-close" id="floatingBasketClose" type="button">×</button></div>
+<div aria-live="polite" class="floating-basket-list empty" id="floatingBasketList"><p>Adicione um produto para começar.</p></div>
+<div class="floating-basket-footer"><div class="floating-basket-total"><span>Subtotal dos produtos</span><strong id="floatingBasketSubtotal">R$ 0,00</strong></div><div class="floating-basket-actions"><button class="btn primary" id="floatingBasketOpenQuote" type="button">Ver no orçamento</button><button class="btn ghost" id="floatingBasketClear" type="button">Limpar</button></div></div>
+</section>
+<div class="floating-basket-peek hidden" id="floatingBasketPeek" role="status"></div>
+<button aria-controls="floatingBasketPanel" aria-expanded="false" aria-label="Abrir pensamento do NestorX com os produtos" class="floating-basket-toggle" id="floatingBasketToggle" type="button"><span aria-hidden="true" class="floating-basket-icon">💭</span><strong class="floating-basket-label">Na cesta</strong><small class="floating-basket-meta" id="floatingBasketMeta">0 produtos</small><span aria-label="Quantidade total" class="floating-basket-count" id="floatingBasketCount">0</span></button>
+</aside>
+<nav aria-label="Navegação principal" class="bottom-nav">
+<button class="nav-btn active" data-page="quote"><span>▤</span><small>Orçamento</small></button>
+<button class="nav-btn" data-page="products"><span>⌕</span><small>Produtos</small></button>
+<button class="nav-btn role-hidden" data-page="assistant" hidden><span>✦</span><small>Assistente</small></button>
+<button class="nav-btn" data-page="support"><span>▣</span><small>Suporte</small></button>
+<button class="nav-btn" data-page="history"><span>◷</span><small>Histórico</small></button>
+<button class="nav-btn" data-page="settings"><span>⚙</span><small>Ajustes</small></button>
+</nav>
+<div class="toast" id="toast" role="status"></div>
+<script src="products.js"></script>
+<script src="ean_map.js?v=5.9.14"></script>
+<script src="app.js?v=5.9.14"></script>
+<link href="static/legacy/v55.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v55.js?v=5.9.14"></script>
+<link href="static/legacy/v56.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v56.js?v=5.9.14"></script>
+<link href="static/legacy/v57.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v57.js?v=5.9.14"></script>
+<link href="static/legacy/v572.css?v=5.9.14" rel="stylesheet"/>
+<script integrity="sha384-8AawNkqZPIWmw/FbkgIB4g/WOJFGIoKBeNu7QItqBLX/ZodJbSJJSsZHQxydwb4y" src="vendor/zxing-browser-0.2.1.min.js"></script>
+<script src="static/legacy/v572.js?v=5.9.14"></script>
+<link href="static/legacy/v575.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v575.js?v=5.9.14"></script>
+<link href="static/legacy/v576.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v576.js?v=5.9.14"></script>
+<link href="static/legacy/v577.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v577.js?v=5.9.14"></script>
+<link href="static/legacy/v578.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v578.js?v=5.9.14"></script>
+<link href="static/legacy/v59.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v59.js?v=5.9.14"></script>
+<link href="static/legacy/v593.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v593.js?v=5.9.14"></script>
+<link href="static/legacy/v596.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v596.js?v=5.9.14"></script>
+<link href="static/legacy/v597.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v597.js?v=5.9.14"></script>
+<link href="static/legacy/v598.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v598.js?v=5.9.14"></script>
+<link href="static/legacy/v599.css?v=5.9.14" rel="stylesheet"/>
+<script src="static/legacy/v599.js?v=5.9.14"></script>
+</body>
+</html>

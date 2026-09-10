@@ -1,0 +1,68 @@
+SEG VENDAS 5.9.0 — ANTES DE INSTALAR NO SERVIDOR PRINCIPAL
+==========================================================
+
+1. NÃO instalar diretamente na raiz oficial antes da homologação.
+2. Criar uma pasta separada de teste, por exemplo: SEG Vendas Homologação.
+3. Fazer cópia externa das pastas data e manuais da versão atual.
+4. Testar login de vendedor, coordenador e administrador.
+5. Confirmar se cada coordenador visualiza somente a própria loja.
+6. Testar orçamento, venda confirmada, entrega, fotos, selos e histórico.
+7. Configurar a credencial da API diretamente no computador servidor.
+8. Não cadastrar token por outro computador enquanto o endereço não possuir HTTPS.
+9. Usar primeiro credenciais e base de homologação do Dataplace.
+10. Somente ativar sincronização depois de validar o mapeamento dos campos.
+
+DADOS NECESSÁRIOS PARA CONECTAR O DATAPLACE
+============================================
+
+- URL da API de homologação.
+- Método de autenticação: Bearer, API Key, OAuth ou outro.
+- Credencial exclusiva para o SEG Vendas, com o menor acesso necessário.
+- Endpoint de teste/saúde.
+- Endpoint de clientes.
+- Endpoint de produtos.
+- Endpoint de preços por loja ou tabela.
+- Endpoint de estoque por loja.
+- Endpoint de vendedores e filiais.
+- Exemplos reais de resposta JSON.
+- Regras de paginação, filtros e limite de requisições.
+- Identificadores únicos de cliente, produto, vendedor e loja.
+- Informação sobre ambiente sandbox/homologação.
+- Definição de quais dados podem ser gravados e quais são somente leitura.
+
+O QUE A CENTRAL DE INTEGRAÇÕES 5.9.0 JÁ FAZ
+============================================
+
+- Cadastra Dataplace ou uma API REST genérica.
+- Guarda URL e endpoints no servidor.
+- Protege token/chave com o DPAPI do Windows.
+- Nunca devolve a credencial para o navegador.
+- Testa URL, autenticação, status HTTP e tempo de resposta.
+- Registra alterações e testes em auditoria.
+
+O QUE AINDA DEPENDE DA DOCUMENTAÇÃO DA API
+==========================================
+
+- Converter os campos externos para o formato interno.
+- Sincronizar clientes, produtos, preços e estoque.
+- Definir prioridades quando houver conflito.
+- Criar fila offline e repetição automática.
+- Garantir que uma operação não seja enviada duas vezes.
+- Definir atualização por loja e operação durante queda de internet.
+
+PREPARAÇÃO PARA VIRAR UMA FERRAMENTA DE VENDA PARA OUTRAS EMPRESAS
+==================================================================
+
+- Remover lojas, vendedores e regras comerciais fixas do código.
+- Criar cadastro de empresa, filiais, perfis e permissões.
+- Permitir identidade visual por empresa.
+- Criar adaptadores separados para cada ERP/API.
+- Isolar os dados de cada empresa.
+- Migrar arquivos JSON para PostgreSQL na versão online.
+- Adotar HTTPS, backups externos, monitoramento e trilhas de auditoria.
+
+IMPORTANTE
+==========
+
+Configuração de conexão não significa sincronização pronta. A sincronização só deve ser
+liberada após testes com a documentação e a base de homologação do ERP.

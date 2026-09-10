@@ -1,0 +1,13 @@
+PASTA DE DADOS — SEG VENDAS 5.2
+
+fotos_produtos/
+  Coloque as fotos usando o código do produto como nome:
+  19467.jpg, 19467.png ou 19467.webp
+  Fotos adicionais podem usar 19467_2.jpg, 19467_3.jpg etc.
+  O arquivo sem sufixo é usado como foto principal.
+
+modelo_clientes.csv
+  Exemplo de cabeçalho aceito para importar clientes pelo aplicativo.
+
+Os arquivos JSON desta pasta são bancos locais de teste. Não edite enquanto o servidor estiver aberto.
+Faça backup da pasta "data" antes de trocar de computador.

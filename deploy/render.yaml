@@ -1,0 +1,58 @@
+services:
+  - type: web
+    name: seg-vendas-principal
+    env: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /healthz
+    autoDeploy: false
+    disk:
+      name: seg-vendas-data
+      mountPath: /app/data
+      sizeGB: 10
+    envVars:
+      - key: SEG_CLOUD
+        value: "1"
+      - key: SEG_ALLOWED_HOSTS
+        sync: false
+      - key: SEG_PUBLIC_URL
+        sync: false
+      - key: SEG_SYNC_ENABLED
+        value: "0"
+      - key: SEG_SYNC_WORKER
+        value: "0"
+      - key: SEG_BACKUP_ENABLED
+        value: "1"
+      - key: SEG_REPLICATION_HUB
+        value: "0"
+      - key: SEG_STORE_ID
+        sync: false
+      - key: SEG_STORE_NAME
+        sync: false
+      - key: SEG_REPLICATION_HUB_URL
+        sync: false
+      - key: SEG_REPLICATION_TOKEN
+        sync: false
+      - key: SEG_REPLICATION_STORE_TOKENS
+        sync: false
+      - key: SEG_REPLICATION_ENABLED
+        value: "0"
+      - key: SEG_REPLICATION_WORKER
+        value: "0"
+      - key: DATAPLACE_BASE_URL
+        sync: false
+      - key: DATAPLACE_API_KEY
+        sync: false
+      - key: DATAPLACE_AUTH_TYPE
+        value: "api-key"
+      - key: DATAPLACE_API_KEY_HEADER
+        value: "X-API-Key"
+      - key: DATAPLACE_HEALTH_PATH
+        sync: false
+      - key: DATAPLACE_CUSTOMERS_PATH
+        sync: false
+      - key: DATAPLACE_PRODUCTS_PATH
+        sync: false
+      - key: DATAPLACE_QUOTE_PATH
+        sync: false

@@ -1,0 +1,24 @@
+{
+  "name": "SEG Vendas 5.9.14 Premium",
+  "short_name": "SEG Vendas",
+  "description": "Versão Premium com pesquisa inteligente, cesta flutuante e instalação no celular.",
+  "id": "./index.html",
+  "scope": "./",
+  "start_url": "./index.html?v=5.9.14",
+  "display": "standalone",
+  "background_color": "#f4f6f5",
+  "theme_color": "#006a3b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

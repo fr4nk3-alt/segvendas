@@ -1,0 +1,75 @@
+/* SEG Vendas 5.9.7 — área segura para o painel do NestorX e cesta flutuante */
+
+/* A ajuda ocupa uma caixa própria. Os controles ficam sempre acessíveis, mesmo
+   quando a altura disponível é pequena. */
+.nestorx-tip.seguito-tip {
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  max-height: min(520px, calc(100dvh - 32px));
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+.nestorx-tip.seguito-tip > .nestorx-tip-actions {
+  position: sticky;
+  bottom: -1px;
+  z-index: 2;
+  margin-top: auto;
+  padding-bottom: 1px;
+  background: rgba(255, 255, 255, .985);
+}
+.nestorx-help-open .nestorx-tip.seguito-tip { z-index: 120; }
+
+/* Quando a ajuda está aberta, a cesta vira apenas um botão discreto e é
+   colocada pelo JS no primeiro canto livre da tela. Ela nunca fica sobre o
+   avatar, o painel de ajuda ou a navegação inferior. */
+.avatar-basket-thought.is-help-safe {
+  z-index: 80;
+  top: var(--basket-safe-top, 0px) !important;
+  left: var(--basket-safe-left, 0px) !important;
+  right: auto !important;
+  bottom: auto !important;
+  align-items: center !important;
+  pointer-events: auto;
+}
+.avatar-basket-thought.is-help-safe .floating-basket-panel,
+.avatar-basket-thought.is-help-safe .floating-basket-peek {
+  display: none !important;
+}
+.avatar-basket-thought.is-help-safe .floating-basket-toggle {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  min-width: 52px;
+  width: 52px;
+  min-height: 48px;
+  height: 48px;
+  padding: 7px;
+  border-radius: 999px;
+  box-shadow: 0 7px 20px rgba(0, 63, 36, .22);
+}
+.avatar-basket-thought.is-help-safe .floating-basket-icon {
+  grid-row: 1;
+  font-size: 22px;
+}
+.avatar-basket-thought.is-help-safe .floating-basket-label,
+.avatar-basket-thought.is-help-safe .floating-basket-meta { display: none; }
+.avatar-basket-thought.is-help-safe .floating-basket-count {
+  top: -6px;
+  right: -5px;
+  min-width: 23px;
+  height: 23px;
+  font-size: 10px;
+}
+
+@media (max-width: 520px) {
+  .nestorx-tip.seguito-tip { max-height: calc(100dvh - 16px); }
+  .nestorx-tip.seguito-tip > .nestorx-tip-actions { padding-top: 8px; }
+  .avatar-basket-thought.is-help-safe .floating-basket-toggle {
+    min-width: 48px;
+    width: 48px;
+    min-height: 44px;
+    height: 44px;
+  }
+}

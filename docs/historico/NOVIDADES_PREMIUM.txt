@@ -1,0 +1,35 @@
+SEG VENDAS 5.3 PREMIUM — NOVIDADES
+===================================
+
+TELA DE ENTRADA ORGANIZADA
+- O aplicativo abre primeiro no login.
+- O menu “Onde você quer ir hoje?” aparece somente depois da autenticação.
+- O usuário pode retornar ao menu pelo botão Início.
+
+LOGIN COM SENHA
+- Entrada por código do funcionário ou nome de usuário.
+- Senha padrão vinculada ao código quando disponível.
+- Senhas protegidas por hash e salt.
+- Cada usuário pode trocar a própria senha.
+
+ACESSO POR PERFIL
+- Cliente: somente Catálogo e Manuais públicos.
+- Vendedor: orçamento, catálogo, assistente, suporte e histórico.
+- Coordenador/Administrador: acesso completo conforme permissões.
+
+MUNDO DO SEGUITO
+- Menu visual e intuitivo.
+- Atalhos grandes para Orçamento, Catálogo, Manuais e Clientes.
+- Para clientes, o menu mostra apenas Catálogo e Manuais.
+
+RECURSOS PRESERVADOS
+- Orçamento guiado.
+- Catálogo com fotos e preços.
+- Base de clientes.
+- Central de manuais e SEG Ajuda.
+- Fórum interno para usuários autorizados.
+- Assistente SEGuito.
+- Histórico e ajustes por perfil.
+
+Versão: SEG Vendas 5.3 Premium
+Data: 31/07/2026

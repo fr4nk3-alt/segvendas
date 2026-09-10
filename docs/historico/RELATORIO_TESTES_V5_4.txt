@@ -1,0 +1,23 @@
+RELATÓRIO DE TESTES — SEG VENDAS 5.4 PREMIUM
+Data: 31/07/2026
+
+[APROVADO] app.js validado pelo Node.js sem erros de sintaxe.
+[APROVADO] servidor.py compilado sem erros de sintaxe.
+[APROVADO] index.html sem IDs duplicados.
+[APROVADO] Quatro etapas de orçamento detectadas.
+[APROVADO] Quatro páginas internas detectadas.
+[APROVADO] Etapa 1 contém loja, vendedor, pagamento e validade.
+[APROVADO] Etapa 2 contém pesquisa e dados do cliente.
+[APROVADO] Etapa 3 contém pesquisa de produtos, SEGuito e carrinho.
+[APROVADO] Etapa 4 contém desconto, frete, totais, impressão e compartilhamento.
+[APROVADO] Cartões numerados possuem clique, teclado e indicação da etapa ativa.
+[APROVADO] Botões Voltar e Próximo foram incluídos.
+[APROVADO] Login e menu por perfil preservados.
+[APROVADO] Catálogo preservado.
+[APROVADO] Manuais preservados.
+[APROVADO] Fórum preservado.
+[APROVADO] Clientes preservados.
+[APROVADO] Fotos, histórico e ajustes preservados.
+[APROVADO] Perfil Cliente continua restrito a Catálogo e Manuais públicos.
+
+Observação: impressão física, câmera e compartilhamento devem ser conferidos no Windows e no celular da rede real.

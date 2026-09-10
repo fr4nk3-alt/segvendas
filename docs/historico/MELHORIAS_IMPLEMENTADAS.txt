@@ -1,0 +1,67 @@
+MELHORIAS IMPLEMENTADAS NO SEG VENDAS 5.2
+==========================================
+
+1. LOGIN SIMPLIFICADO (SEM SENHA)
+   - Removida a necessidade de senha para acesso
+   - Agora os usuários entram apenas com o nome de usuário
+   - Interface de login simplificada e mais rápida
+   - Melhor experiência em dispositivos móveis
+
+2. SISTEMA DE REGISTRO DE ACESSOS
+   - Criado arquivo data/usuarios_log.txt para registro automático
+   - Registra: data/hora, ação (LOGIN/LOGOUT), usuário, perfil e loja
+   - Permite auditoria completa dos acessos ao sistema
+   - Formato legível e fácil de exportar
+
+3. MELHORIAS NA INTERFACE RESPONSIVA
+   - Otimização para smartphones (até 560px)
+   - Otimização para tablets (561px a 768px)
+   - Otimização para desktops grandes (769px a 1024px)
+   - Layout adaptativo em todas as seções
+   - Botões e campos otimizados para toque
+   - Melhor legibilidade em diferentes tamanhos de tela
+
+4. OTIMIZAÇÕES DE PERFORMANCE
+   - Removido código de criptografia de senha (hash, salt, etc.)
+   - Simplificado processo de autenticação
+   - Removido sistema de tentativas de login
+   - Reduzido dependências no servidor Python
+   - Melhorado tempo de resposta do sistema
+
+5. MELHORIAS NA DOCUMENTAÇÃO
+   - Atualizado LEIA-ME.txt com novas funcionalidades
+   - Instrução clara sobre acesso simplificado
+   - Explicação do sistema de registro de acessos
+   - Documentação das melhorias de interface
+
+6. COMPATIBILIDADE MANTIDA
+   - Todas as funcionalidades originais preservadas
+   - Sistema de permissões mantido intacto
+   - Funcionalidades de orçamento, catálogo e manuais funcionando
+   - Sistema de fotos centralizado mantido
+   - Integração com SEG Ajuda preservada
+
+RESULTADOS
+==========
+- Acesso mais rápido e simples
+- Interface mais amigável em dispositivos móveis
+- Auditoria completa de acessos
+- Performance melhorada
+- Experiência do usuário otimizada
+
+INSTRUÇÕES DE USO
+=================
+1. Execute iniciar_app.bat para iniciar o servidor
+2. Acesse pelo navegador no endereço mostrado
+3. Digite apenas o nome de usuário (sem senha)
+4. Acesse data/usuarios_log.txt para ver registros de acesso
+
+PERFIS DISPONÍVEIS
+==================
+- Vendedores: arilson, evelyn, filipemores, ketsa, ludmila, rodrigo, rafaela, guilherme
+- Coordenadores: dayany, aline, clarice, eliane
+- Cliente: cliente
+- Administrador: admin
+
+VERSÃO: SEG Vendas 5.2 Melhorado
+DATA: 31/07/2026

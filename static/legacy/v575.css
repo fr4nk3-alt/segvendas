@@ -1,0 +1,44 @@
+/* SEG Vendas 5.7.5 — situações visíveis e modelos de orçamento */
+
+.seguito-mascot .seguito-eyes ellipse{animation:seguitoBlink 2s ease-in-out infinite}
+@keyframes seguitoBlink{0%,42%,47%,53%,78%,82%,100%{transform:scaleY(1)}44.5%,50.5%{transform:scaleY(.08)}80%{transform:scaleY(.18)}}
+
+.quote-title-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.quote-templates-open{white-space:nowrap}
+.quote-templates-sheet{max-width:850px}
+.quote-template-form{display:grid;grid-template-columns:minmax(210px,1fr) minmax(210px,1fr) auto;gap:10px;align-items:end;padding:14px;border-radius:14px;background:#eef7f2;margin-bottom:9px}
+.quote-template-form label{font-size:12px;font-weight:700;color:#34463d}
+.quote-template-form input{margin-top:5px}
+.quote-template-form button{min-height:44px}
+.template-security-note{margin:8px 0 14px;color:#637068;font-size:11px;line-height:1.45}
+.quote-template-list{display:grid;gap:9px;max-height:48vh;overflow:auto}
+.quote-template-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:13px 14px;border:1px solid #dce7e1;border-radius:13px;background:#fff}
+.quote-template-card strong{display:block;color:#006a3b}
+.quote-template-card p{margin:4px 0;color:#405249;font-size:12px}
+.quote-template-card small{color:#6b786f}
+.quote-template-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+
+.client-page-card.blocked strong,.client-result.blocked strong{color:#a72d1d}
+.client-page-card.blocked span:not(.blocked-tag),.client-page-card.blocked small{color:#965147}
+.client-result.blocked{border-color:#efb5aa;background:#fff4f2;cursor:not-allowed;opacity:1}
+.client-result.blocked:hover{border-color:#efb5aa;background:#fff4f2}
+.client-result.blocked span:not(.blocked-tag){color:#965147}
+.client-result.blocked b{color:#a72d1d}
+
+.product-row.product-inactive{border-color:#e2b6ae;background:#fff8f6}
+.product-row.product-inactive .product-code,.product-row.product-inactive .product-desc{color:#9c382b}
+.product-row.product-inactive .product-price{color:#7a5b55;text-decoration:line-through}
+.product-row.product-inactive img{filter:grayscale(1);opacity:.58}
+.product-inactive-tag{display:inline-block;margin:4px 0;padding:3px 8px;border-radius:99px;background:#ffe0da;color:#a72d1d;font-size:10px;font-weight:800;letter-spacing:.04em}
+.product-inactive-help{display:block;margin-top:5px;color:#9c382b;font-size:10px}
+.product-status-panel{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 11px;margin-bottom:12px;border-radius:11px;background:#eef7f2;border:1px solid #cfe2d7}
+.product-status-panel>div{display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center}
+.product-status-panel strong{color:#006a3b;font-size:13px}
+.product-status-panel small{grid-column:2;color:#587066;margin-top:2px}
+.product-status-dot{grid-row:1/3;width:10px;height:10px;border-radius:50%;background:#13a35d;box-shadow:0 0 0 4px #d7f2e4}
+.product-status-panel.inactive{background:#fff4f2;border-color:#efb5aa}
+.product-status-panel.inactive strong,.product-status-panel.inactive small{color:#a72d1d}
+.product-status-panel.inactive .product-status-dot{background:#c23d2c;box-shadow:0 0 0 4px #ffe0da}
+
+@media(max-width:760px){.quote-template-form{grid-template-columns:1fr}.quote-template-card{grid-template-columns:1fr}.quote-template-actions{justify-content:flex-start}.quote-title-actions{align-items:flex-end;flex-direction:column}.quote-templates-open{order:2}.product-status-panel{align-items:flex-start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.seguito-mascot .seguito-eyes ellipse{animation:none}}

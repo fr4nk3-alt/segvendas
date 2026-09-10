@@ -1,0 +1,16 @@
+RELATÓRIO DE TESTES — SEG VENDAS 5.4.1
+Data: 03/08/2026
+
+[APROVADO] servidor.py compila sem erro de sintaxe.
+[APROVADO] app.js passa na verificação de sintaxe do Node.js.
+[APROVADO] 58 funcionários ativos do CSV possuem cadastro por código.
+[APROVADO] 58 senhas iniciais SEG@CÓDIGO foram validadas.
+[APROVADO] login do código 15 (Renato) validado pela API.
+[APROVADO] cadastro de cliente validado pela API.
+[APROVADO] login do cliente recém-cadastrado validado.
+[APROVADO] duplicidade de usuário é bloqueada.
+[APROVADO] botão e formulário de cadastro existem na tela de login.
+[APROVADO] cliente recebe perfil restrito a Catálogo e Manuais.
+[APROVADO] quatro etapas clicáveis do orçamento permanecem no aplicativo.
+
+Observação: impressão, câmera e instalação como PWA devem ser conferidas no Windows/celular real.

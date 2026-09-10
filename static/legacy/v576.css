@@ -1,0 +1,27 @@
+/* SEG Vendas 5.7.6 — seletor de mascote do assistente */
+
+.assistant-avatar-chooser{margin-top:10px;padding-top:9px;border-top:1px solid #e1ebe5}
+.assistant-avatar-chooser>strong{display:block;margin-bottom:7px;color:#355348;font-size:10px;letter-spacing:.02em}
+.assistant-avatar-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.assistant-avatar-option{display:grid;justify-items:center;gap:3px;min-width:0;min-height:66px;padding:5px 3px;border:1px solid #c9ded2;border-radius:10px;background:#f6faf8;color:#355348;cursor:pointer}
+.assistant-avatar-option:hover{background:#e8f5ee}
+.assistant-avatar-option.selected,.assistant-avatar-option[aria-pressed="true"]{border-color:#087c4a;background:#def2e7;color:#006a3b;box-shadow:inset 0 0 0 1px #087c4a}
+.assistant-avatar-option span{display:grid;place-items:center;width:34px;height:38px}
+.assistant-avatar-option img{display:block;float:none;width:34px;height:38px;max-width:34px;max-height:38px;margin:0;border-radius:0;object-fit:contain;filter:drop-shadow(0 2px 2px #173b2a22)}
+.assistant-avatar-option b{max-width:100%;overflow:hidden;text-overflow:ellipsis;font-size:9px;white-space:nowrap}
+
+.nestorx-mover[data-avatar="seguido"]{--nestorx-width:116px;--nestorx-height:152px}
+.nestorx-mover[data-avatar="pretinha"]{--nestorx-width:112px;--nestorx-height:166px}
+.nestorx-mover[data-avatar="seguido"] .nestorx-lamp-button,.nestorx-mover[data-avatar="pretinha"] .nestorx-lamp-button{top:24%}
+.nestorx-mover[data-avatar="seguido"] .nestorx-figure{filter:drop-shadow(0 9px 8px rgba(5,24,46,.18))}
+.nestorx-mover[data-avatar="pretinha"] .nestorx-figure{filter:drop-shadow(0 8px 7px rgba(5,24,46,.2))}
+
+@media(max-width:650px){
+  .nestorx-mover[data-avatar="seguido"]{--nestorx-width:72px;--nestorx-height:94px}
+  .nestorx-mover[data-avatar="pretinha"]{--nestorx-width:70px;--nestorx-height:104px}
+  .assistant-avatar-option{min-height:62px}
+}
+@media(max-height:520px){
+  .nestorx-mover[data-avatar="seguido"]{--nestorx-width:56px;--nestorx-height:74px}
+  .nestorx-mover[data-avatar="pretinha"]{--nestorx-width:54px;--nestorx-height:80px}
+}

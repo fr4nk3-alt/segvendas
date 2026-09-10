@@ -1,0 +1,13 @@
+SEG VENDAS 5.9.13 — NUMERAÇÃO DE ORÇAMENTOS POR FILIAL
+
+- Cada filial passa a emitir orçamentos com uma sigla própria e cinco dígitos.
+- Matriz: MA00001, Oeste: OE00001, São Cristóvão: SC00001 e Lagos: LA00001.
+- O exemplo da SEG Oeste fica no formato OE00022.
+- A sequência é independente por filial e continua disponível no modo offline.
+- O navegador mostra uma prévia imediata; ao salvar, o servidor local reserva o
+  número definitivo de forma atômica para evitar colisões entre terminais.
+- Números legados somente numéricos são convertidos automaticamente para o
+  padrão da filial; o valor anterior fica guardado no campo `legacyNumber`.
+- O vínculo de pedidos reutilizados também é atualizado para o número padrão.
+- O retorno do servidor atualiza o número exibido, os arquivos PDF/imagem e o
+  compartilhamento do orçamento.

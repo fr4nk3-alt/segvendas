@@ -1,0 +1,32 @@
+RELATÓRIO DE TESTES — SEG VENDAS 5.2
+Data: 29/07/2026
+
+TESTES AUTOMATIZADOS / TÉCNICOS
+[APROVADO] servidor.py compilado sem erros de sintaxe.
+[APROVADO] app.js validado pelo Node.js sem erros de sintaxe.
+[APROVADO] index.html contém todos os elementos fixos referenciados pelo JavaScript.
+[APROVADO] inicialização do servidor em porta alternativa quando 8080 está ocupada.
+[APROVADO] login válido de coordenador.
+[APROVADO] login válido de vendedor.
+[APROVADO] login válido de cliente.
+[APROVADO] rejeição de senha incorreta.
+[APROVADO] sessão autenticada por token.
+[APROVADO] bloqueio do relatório de fotos para vendedor.
+[APROVADO] bloqueio da pesquisa de clientes para cliente externo.
+[APROVADO] bloqueio de acesso direto a users.json e demais dados internos.
+[APROVADO] leitura das fotos centralizadas no diretório.
+[APROVADO] envio e exclusão de imagem pela API do coordenador.
+[APROVADO] importação de CSV separado por ponto e vírgula.
+[APROVADO] mapeamento de código, razão social, documento, telefones, endereço e cidade.
+[APROVADO] pesquisa do cliente importado por nome.
+[APROVADO] cache da versão atualizado para 5.2.
+
+VALIDAÇÃO MANUAL NECESSÁRIA NO WINDOWS/CELULAR
+- Aparência e animações do SEGuito.
+- Uso da câmera e galeria do aparelho.
+- Compartilhamento nativo de JPG/PDF no WhatsApp.
+- Acesso simultâneo por diferentes celulares na mesma rede.
+- Pesquisa ao vivo no suporte.segbr.com.br na rede da SEG.
+
+OBSERVAÇÃO
+Esta é uma versão local de teste. A autenticação melhora o controle durante os testes, mas a publicação externa exigirá HTTPS, banco online, recuperação de senha, logs e backups gerenciados.
