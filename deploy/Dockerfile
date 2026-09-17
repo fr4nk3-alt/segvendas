@@ -7,9 +7,15 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
-COPY . /app
+# Instalar git para baixar código
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-# A plataforma monta o volume persistente exatamente neste diretório.
+# Baixar código do GitHub
+RUN git clone --depth 1 --branch main https://github.com/fr4nk3-alt/segvendas.git /tmp/segvendas && \
+    cp -r /tmp/segvendas/* /app/ && \
+    rm -rf /tmp/segvendas
+
+# Criar diretórios de dados
 RUN mkdir -p /app/data/backups /app/data/fotos_produtos /app/data/fotos_perfil
 
 EXPOSE 8080
