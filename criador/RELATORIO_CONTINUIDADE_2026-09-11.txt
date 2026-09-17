@@ -1,0 +1,319 @@
+SEG VENDAS — RELATÓRIO DE CONTINUIDADE
+======================================
+
+Data do registro: 11/09/2026
+Projeto principal de laboratório:
+C:\Users\RENATO\Desktop\SEG\01_versoes\SEG_Vendas_5.9.14_Reorganizado
+
+OBJETIVO DESTE DOCUMENTO
+------------------------
+Permitir que o trabalho seja retomado exatamente deste ponto em uma próxima
+conversa, sem depender da memória da sessão anterior. Antes de continuar, ler
+este relatório, o ROADMAP e o roteiro de integração.
+
+DOCUMENTOS PRINCIPAIS
+---------------------
+1. docs\ROADMAP.md
+   Fases concluídas, refatoração, Windows Server e integração Dataplace.
+
+2. criador\ROTEIRO_INTEGRACAO_DATAPLACE_AZURE.txt
+   Plano detalhado e imprimível da arquitetura local-first.
+
+3. docs\PLANO_INTEGRACAO_DATAPLACE_AZURE_PARA_IMPRESSAO.txt
+   Outra cópia do plano preparada para impressão.
+
+4. Este arquivo:
+   criador\RELATORIO_CONTINUIDADE_2026-09-11.txt
+
+OBJETIVO GERAL DO PROJETO
+-------------------------
+Fazer o SEG Vendas operar profissionalmente e integrar-se ao Dataplace Symphony
+Cloud para receber produtos, descrições, preços, EAN, estoque por filial,
+clientes e manuais, preservando a operação independente de cada loja.
+
+O desenho decidido é local-first:
+
+Dataplace Cloud -> integrador/hub no Azure -> servidores locais das lojas
+
+Cada loja continua com:
+- SEG Vendas local;
+- dados locais;
+- Gertec local na porta TCP 6500;
+- funcionamento quando internet, Azure ou Dataplace estiverem indisponíveis;
+- fila para sincronizar quando a conexão retornar.
+
+O Azure será usado futuramente para sincronização, auditoria, compartilhamento
+controlado entre lojas e proteção adicional dos dados. Não será necessário para
+cada leitura do Gertec.
+
+FONTES OFICIAIS DEFINIDAS
+-------------------------
+- Produtos: Dataplace.
+- Descrições: Dataplace.
+- Preços: Dataplace.
+- EAN/códigos de barras: Dataplace.
+- Estoque por filial: Dataplace.
+- Clientes: Dataplace.
+- Manuais de produtos: Dataplace, respeitando autorização de distribuição.
+- Orçamentos e pedidos: originados na loja e enviados para a central.
+- Configuração de rede e Gertec: exclusiva de cada loja.
+- Funcionários: regras de autoridade, desligamento e permissões ainda precisam
+  ser confirmadas antes da automação.
+
+REGRAS IMPORTANTES
+------------------
+- O Gertec permanece somente na rede local de cada loja.
+- O SEG não deve sobrescrever preço ou estoque oficial do Dataplace.
+- Nunca substituir dados locais válidos por arquivos vazios, incompletos,
+  inválidos ou mais antigos.
+- Sincronização não substitui backup.
+- Git não guarda os dados ignorados e não substitui backup.
+- Dados de laboratório e produção devem permanecer separados.
+- Não incluir dados reais, credenciais ou backups no GitHub.
+- Não excluir arquivos sem confirmação explícita.
+
+TRABALHO ANTERIOR CONCLUÍDO
+---------------------------
+1. A versão 5.9.14 foi criada como cópia reorganizada da versão anterior.
+2. A versão 5.9.13 foi preservada.
+3. A raiz foi organizada em pastas como static\legacy, scripts, tools, deploy,
+   docs\historico e _descartados.
+4. As referências internas foram ajustadas.
+5. Pastas internas foram protegidas contra acesso HTTP.
+6. README.md, requirements.txt e verificar.bat foram criados.
+7. Git foi instalado e inicializado no projeto 5.9.14.
+8. O protocolo Gertec foi corrigido conforme o SDK oficial:
+   - cada recv() tratado como uma mensagem;
+   - respostas sem newline;
+   - handshake oficial;
+   - keepalive;
+   - tolerância a TC502 sem #alwayslive_ok;
+   - consultas consecutivas não repetem o produto anterior.
+9. O usuário confirmou que o Gertec funcionou e que os testes passaram.
+10. Foi gerado um ZIP de distribuição da versão 5.9.14.
+11. Foi criado o ROADMAP para laboratório, Windows Server e Dataplace/Azure.
+
+ESTADO DO GIT
+-------------
+Repositório:
+C:\Users\RENATO\Desktop\SEG\01_versoes\SEG_Vendas_5.9.14_Reorganizado\.git
+
+Commits existentes:
+- 8677b95 Adiciona docs/ROADMAP.md (fases 3-5, preparação para Windows Server)
+- ccb65c0 SEG Vendas 5.9.14: reorganização do projeto e protocolo Gertec oficial
+
+Estado não registrado em 11/09/2026:
+- docs\ROADMAP.md modificado;
+- pasta criador\ não rastreada;
+- docs\PLANO_INTEGRACAO_DATAPLACE_AZURE_PARA_IMPRESSAO.txt não rastreado.
+
+Não descartar essas alterações. Elas contêm os documentos e ajustes produzidos
+após o último commit. Nenhum novo commit foi solicitado nesta etapa.
+
+ETAPA 1 — CONCLUÍDA
+-------------------
+Foi preservada uma referência executável e uma cópia separada dos dados.
+
+Local:
+C:\Users\RENATO\Desktop\SEG\03_Backups_e_Dados\Etapa_1_5.9.14_20260911-173741
+
+Arquivos:
+1. SEG_Vendas_5.9.14_Codigo_Executavel.zip
+   Tamanho: 19.082.412 bytes
+   SHA-256: 6B75F812AE97DF64BA789CD5CE5D13D87AC024867F72C21470319DBEB2687413
+
+2. seg-store-laboratorio-5-9-14-20260911-174051.zip
+   Tamanho: 115.103.685 bytes
+   SHA-256: 2E40DC39BB4E60EAB4E501229F3B94A5F79B51DFCD3365235DD5009B3AE3851A
+   Contém 34 arquivos de dados e manifest.json.
+
+3. RELATORIO_ETAPA_1.txt
+   Relatório da preservação e verificação dos ZIPs.
+
+Validação da Etapa 1:
+- compilação aprovada;
+- 18 testes executados;
+- 18 testes aprovados;
+- a versão 5.9.14 não estava rodando durante a cópia dos dados;
+- a instância ativa encontrada era a distribuição 5.9.13;
+- estrutura e hashes dos ZIPs foram verificados.
+
+ETAPA 2 — ESTADO ATUAL (ATUALIZADO EM 14/09/2026)
+------------------------------------------------------
+A primeira parte da Etapa 2 foi implementada e testada. Nenhum dado atual foi
+alterado.
+
+Decisão expressa do usuário:
+"manter todos os arquivos que já estão dentro da pasta, nos quais o software já
+pesquisa, sem mudar nada"
+
+Portanto, não alterar neste momento:
+- products.js;
+- ean_map.js;
+- data\clientes.csv;
+- data\clients.json;
+- data\funcionarios.csv;
+- data\users.json;
+- arquivos atuais de estoque, manuais, fotos e históricos.
+
+LEVANTAMENTO DA ETAPA 2
+-----------------------
+1. Clientes já possuem importação em /api/clients/import.
+   Ela lê CSV/XLS/XLSX, faz backup e grava clientes.csv e clients.json.
+   Problema: aplica diretamente, sem uma operação separada de prévia/confirmar.
+
+2. Funcionários já possuem importação em /api/employees/import.
+   Ela preserva senhas existentes, mas também aplica diretamente e precisa de
+   validação e prévia mais completas.
+
+3. Produtos possuem ferramenta tools\gerar_products.py.
+   Ela valida código, descrição e preço e gera products.js.
+   Ainda é uma ferramenta externa, não um fluxo controlado dentro do SEG.
+
+4. EAN possui tools\gerar_ean_map.py.
+   Ela gera ean_map.js a partir do relatório de produtos do Dataplace.
+
+5. Estoque por filial ainda não possui importador identificado.
+
+6. Foi encontrado:
+   C:\Users\RENATO\Desktop\relatorio de produto.csv
+   O arquivo contém cadastro, descrição, EAN e uma coluna de quantidade em
+   estoque, porém não foi confirmado com segurança qual coluna representa o
+   preço oficial de venda nem se o estoque está separado por filial.
+
+7. Existem modelos:
+   - data\modelo_clientes.csv;
+   - data\modelo_funcionarios.csv;
+   - tools\modelo_produtos.csv.
+
+IMPLEMENTAÇÃO REALIZADA NA ETAPA 2 (14/09/2026)
+----------------------------------------------
+Foi criado tools\import_preview.py com as seguintes funcionalidades:
+
+1. Leitura de CSV do Dataplace com detecção de delimitador e encoding.
+2. Mapeamento automático de colunas (Código, Descrição, Código de Barras, Valor).
+3. Validação de código, descrição, preço e EAN.
+4. Detecção de duplicidades e registros inválidos.
+5. Comparação opcional contra products.js e ean_map.js atuais.
+6. Geração de relatório JSON com:
+   - hash SHA-256 do arquivo;
+   - contagem de linhas válidas, inválidas e ignoradas;
+   - problemas detalhados por linha;
+   - comparação (novo, igual, alterado, ausente);
+   - resumo de diferenças.
+
+7. Documentação em tools\README_IMPORT_PREVIEW.md.
+8. .gitignore atualizado para ignorar test_preview*.csv e preview*.json.
+
+Resultados dos testes:
+- Arquivo válido: 5 produtos, 0 erros, comparação funcionou.
+- Arquivo inválido: 4 erros detectados (código vazio, preço inválido, descrição vazia, preço negativo).
+- verificar.bat: 18 testes aprovados.
+
+Nenhum arquivo de produção foi alterado. O módulo é apenas de análise.
+
+PRÓXIMO PASSO EXATO
+-------------------
+Retomar a Etapa 2 criando primeiro uma área isolada de análise. Ela não poderá
+alterar os arquivos usados pelo sistema.
+
+Fluxo inicial:
+
+arquivo recebido -> área temporária -> validação -> comparação -> relatório
+
+A primeira implementação deve ser SOMENTE PRÉVIA e deve informar:
+- quantidade atual;
+- quantidade recebida;
+- registros novos;
+- registros alterados;
+- duplicidades;
+- registros inválidos;
+- registros ausentes no arquivo recebido;
+- cabeçalhos e formato reconhecidos;
+- origem e hash do arquivo.
+
+Não habilitar aplicação automática nesta primeira parte.
+
+Depois que a prévia estiver testada, implementar separadamente:
+- confirmação explícita;
+- backup anterior à aplicação;
+- escrita atômica;
+- auditoria;
+- retenção da versão anterior;
+- testes de restauração.
+
+ORDEM RECOMENDADA PARA A ETAPA 2
+-------------------------------
+1. Criar módulo reutilizável de importação controlada.
+2. Começar por produtos, preços e EAN, pois afetam SEG e Gertec.
+3. Usar os arquivos existentes apenas como referência e base de comparação.
+4. Não substituir products.js ou ean_map.js durante os testes.
+5. Adicionar testes com arquivos pequenos e fictícios.
+6. Implementar prévia para clientes.
+7. Implementar prévia para funcionários sem alterar senhas/permissões.
+8. Aguardar relatório confiável de estoque por filial antes de definir seu
+   contrato definitivo.
+9. Só depois implementar confirmação e aplicação atômica.
+10. Rodar verificar.bat e testar o Gertec após qualquer mudança no catálogo.
+
+PENDÊNCIAS DA ETAPA 2 (ATUALIZADO EM 14/09/2026)
+-----------------------------------------------------
+[x] Criar módulo reutilizável de importação controlada.
+[x] Implementar leitura e validação de produtos, preços e EAN.
+[x] Implementar comparação contra arquivos atuais.
+[x] Implementar geração de relatório de prévia.
+[x] Adicionar testes com arquivos fictícios.
+[x] Documentar o uso e atualizar .gitignore.
+[ ] Definir contrato dos relatórios Dataplace atualizados (aguardar exportação).
+[ ] Criar aplicação atômica com backup e auditoria, em etapa posterior.
+[ ] Implementar prévia para clientes.
+[ ] Implementar prévia para funcionários sem alterar senhas/permissões.
+[ ] Aguardar relatório confiável de estoque por filial.
+
+QUESTÕES A CONFIRMAR QUANDO HOUVER NOVOS RELATÓRIOS
+--------------------------------------------------
+- Qual coluna é o preço oficial de venda?
+- O preço depende de tabela, filial ou unidade produtiva?
+- Qual campo identifica a filial no relatório de estoque?
+- Estoque é físico, disponível ou já desconta reservas?
+- Clientes inativos devem permanecer localmente ou apenas ser marcados?
+- Qual sistema é a autoridade dos funcionários e das permissões?
+- Os manuais podem ser copiados e armazenados localmente/Azure?
+
+COMANDO DE VALIDAÇÃO
+--------------------
+Na raiz da versão 5.9.14:
+
+verificar.bat
+
+Último resultado conhecido: 18 testes aprovados em 11/09/2026.
+
+INSTRUÇÃO PARA A PRÓXIMA CONVERSA
+--------------------------------
+Informar ao assistente:
+
+"Leia primeiro o arquivo
+C:\Users\RENATO\Desktop\SEG\01_versoes\SEG_Vendas_5.9.14_Reorganizado\criador\RELATORIO_CONTINUIDADE_2026-09-11.txt
+e continue a Etapa 2. O módulo de prévia (tools\import_preview.py) já está
+implementado e testado. Não altere os arquivos de dados atualmente usados pelo
+sistema."
+
+PONTO DE RETOMADA
+-----------------
+A Etapa 1 está concluída e verificada. A primeira parte da Etapa 2 foi
+implementada: o módulo de prévia (tools\import_preview.py) funciona, valida,
+compara e gera relatórios sem alterar os arquivos de produção.
+
+Atualização em 15/09/2026:
+- Foi criado instalador gráfico profissional (scripts\instalar_seg_vendas_pro.ps1)
+- Com janela Windows Forms, barra de progresso, logo e passo a passo visual
+- O INSTALAR_SEG_VENDAS.bat foi atualizado para usar o instalador gráfico
+- O instalador anterior (instalar_seg_vendas.ps1) foi preservado como backup
+
+Próximos passos recomendados:
+1. Testar o instalador gráfico para validar o funcionamento.
+2. Obter exportação oficial atualizada do Dataplace.
+3. Executar import_preview.py com --comparar.
+4. Analisar o relatório para identificar colunas e formatos definitivos.
+5. Se necessário, ajustar o mapeamento de colunas no import_preview.py.
+6. Só depois implementar a aplicação atômica com backup.

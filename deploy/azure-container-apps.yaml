@@ -1,0 +1,100 @@
+# Azure Container Apps Configuration para SEG Vendas
+# Este arquivo define a configuração para deploy no Azure Container Apps
+#
+# Pré-requisitos:
+# - Azure CLI instalado
+# - Conta Azure com permissões para criar recursos
+# - Comando para criar: az containerapp create --resource-group <RG> --yaml azure-container-apps.yaml
+
+metadata:
+  name: seg-vendas-principal
+  description: Servidor SEG Vendas para lojas - hub central
+  labels:
+    app: seg-vendas
+    environment: production
+
+spec:
+  containers:
+    - name: seg-vendas
+      image: seg-vendas:latest  # Substituir pelo registry real após push
+      command: ["python", "servidor.py"]
+      env:
+        # Configuração Cloud
+        - name: SEG_CLOUD
+          value: "1"
+        - name: PORT
+          value: "8080"
+        - name: SEG_BIND_ADDRESS
+          value: "0.0.0.0"
+
+        # Variáveis obrigatórias (definir durante deploy)
+        - name: SEG_PUBLIC_URL
+          secretRef: seg-public-url
+        - name: SEG_ALLOWED_HOSTS
+          secretRef: seg-allowed-hosts
+
+        # Segurança
+        - name: SEG_REPLICATION_ENABLED
+          value: "0"  # Habilitar após configurar tokens
+        - name: SEG_SYNC_ENABLED
+          value: "0"  # Habilitar após validação Dataplace
+
+        # Dataplace (configurar após obter documentação oficial)
+        - name: DATAPLACE_BASE_URL
+          secretRef: dataplace-base-url
+        - name: DATAPLACE_API_KEY
+          secretRef: dataplace-api-key
+
+      resources:
+        cpu: 0.5
+        memory: 1Gi
+
+      probes:
+        liveness:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readiness:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+  scale:
+    minReplicas: 1
+    maxReplicas: 3
+    rules:
+      - name: cpu-scale
+        custom:
+          type: cpu
+          target: 70
+          concurrentRequests: 10
+
+  ingress:
+    external: true
+    targetPort: 8080
+    transport: http
+    # HTTPS é configurado automaticamente pelo Azure
+
+  # Armazenamento persistente
+  volumes:
+    - name: seg-data
+      storageType: AzureFile
+      mountPath: /app/data
+
+  secrets:
+    - name: seg-public-url
+      value: ""  # Definir: https://seu-app.azurecontainerapps.io
+    - name: seg-allowed-hosts
+      value: ""  # Definir: seu-app.azurecontainerapps.io
+    - name: dataplace-base-url
+      value: ""  # Definir após obter documentação
+    - name: dataplace-api-key
+      value: ""  # Definir após obter documentação

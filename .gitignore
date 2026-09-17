@@ -41,6 +41,13 @@ work/
 *.zip
 backups_instalador/
 
+# Testes e relatórios temporários de importação
+tools/test_preview*.csv
+tools/preview*.json
+
+# Logs de instalação
+seg_vendas_install_*.log
+
 # Codigo sem uso aguardando exclusao (ver _descartados/LEIA-ME.txt)
 _descartados/
 

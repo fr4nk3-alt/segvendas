@@ -1,8 +1,8 @@
 # Roadmap técnico — SEG Vendas
 
-Situação em setembro/2026: a versão 5.9.13 roda em produção na loja; a 5.9.14
-(esta pasta, com Git) é o laboratório. Se aprovado, o sistema será realocado em
-um Windows Server.
+A versão 5.9.14 (esta pasta, com Git) é a referência para o laboratório.
+Preservar também a versão anterior, 5.9.13. Se aprovado nos testes e na revisão
+técnica, o sistema será implantado em um Windows Server.
 
 ## Fases já concluídas
 
@@ -19,9 +19,16 @@ um Windows Server.
 
 ## Fase 3 — Refatoração (a conduzir pelo programador)
 
-Nenhum item altera o uso pelo vendedor: `iniciar_app.bat`, porta 8080, Gertec 6500
-e a interface permanecem iguais. Todos podem ser feitos e testados no laboratório
-sem afetar a loja.
+O objetivo é preservar o uso pelo vendedor: `iniciar_app.bat`, porta HTTP 8080,
+Gertec TCP 6500 e a interface. Isso deve ser confirmado por testes após cada etapa,
+não presumido. A Fase 3 não é requisito para continuar testando neste PC.
+
+Manter a 5.9.14 estável e refatorar em uma cópia separada, por exemplo 5.9.15,
+com controle de versão. Separar os dados de cada ambiente: um caminho externo
+compartilhado não isola dados automaticamente. `SEG_DATA_DIR` é uma proposta
+a implementar e validar, não uma configuração garantida nesta versão.
+Instâncias simultâneas precisam de portas diferentes tanto para HTTP quanto
+para Gertec; cada terminal deve apontar para a instância escolhida.
 
 | # | Item | Motivação | Observações |
 |---|------|-----------|-------------|
@@ -29,32 +36,51 @@ sem afetar a loja.
 | 3.2 | Consolidar `static/legacy/v55…v599` em módulos por funcionalidade | 17 camadas incrementais (~290 KB) carregadas em sequência dificultam manutenção | Mapa do que cada camada faz em `docs/ESTRUTURA_E_FUNCOES.md`; manter ordem de carga até a consolidação terminar |
 | 3.3 | Dividir `servidor.py` (~3.600 linhas) em módulos: `auth`, `quotes`, `clients`, `gertec`, `network`, `http_handler` | Revisão e testes por área | A classe `GertecTerminalHandler` e `start_gertec_server()` já são isoláveis |
 | 3.4 | Ampliar testes: autenticação, rate limit, permissões, APIs de orçamento | Hoje só conectores, replicação e Gertec têm testes | `tests/` usa `unittest`; `verificar.bat` roda tudo |
-| 3.5 | Revisar `_descartados/` e apagar | Limpeza final | Ver `_descartados/LEIA-ME.txt` |
+| 3.5 | Revisar `_descartados/` | Limpeza final | Excluir somente após confirmação explícita; ver `_descartados/LEIA-ME.txt` |
 
 ## Fase 4 — Preparação para Windows Server
 
 | # | Item | Motivação |
 |---|------|-----------|
-| 4.1 | Executar como serviço do Windows (NSSM, `sc create` ou Agendador de Tarefas "ao iniciar") | Hoje o servidor vive numa janela CMD; fechar a janela derruba o sistema |
-| 4.2 | Definir `SEG_DATA_DIR` (depende de 3.1) e política de backup para disco/pasta de rede | O backup periódico já existe em `store_replication.py`; falta o destino |
-| 4.3 | Firewall: liberar TCP 8080 (HTTP) e 6500 (Gertec) somente na rede interna | Mesmo cenário da loja |
-| 4.4 | `SEG_BIND_ADDRESS`, `SEG_ALLOWED_HOSTS` e `SEG_PUBLIC_URL` conforme o IP/nome do servidor | Validação de `Host`/`Origin` já existe e depende dessas variáveis |
-| 4.5 | HTTPS (proxy reverso ou certificado interno) se houver acesso fora da rede local | Cookies/sessão e senhas em trânsito |
-| 4.6 | Conta técnica dedicada para o serviço, sem privilégios de administrador | Princípio do menor privilégio |
-| 4.7 | Monitoramento simples: `GET /healthz` já responde `{"ok": true, "version": ...}` | Pode ser usado por qualquer ferramenta de monitoramento |
+| 4.1 | Avaliar serviço do Windows com wrapper compatível ou, como alternativa, Agendador de Tarefas ao iniciar | Agendamento não é serviço; `sc create` sozinho não adapta um script Python ao protocolo de serviços. Testar reinício e recuperação após falha |
+| 4.2 | Implementar o diretório externo de dados e validar backup completo, retenção e restauração | Não presumir que a replicação cubra todos os CSV, JSON, SQLite, imagens e configurações; testar recuperação consistente |
+| 4.3 | Firewall: restringir TCP 8080 (HTTP) e 6500 (Gertec) aos equipamentos/redes autorizados | Confirmar portas e IP fixo ou reserva DHCP; redirecionar os terminais somente na migração |
+| 4.4 | Revisar `SEG_BIND_ADDRESS`, `SEG_ALLOWED_HOSTS` e `SEG_PUBLIC_URL` conforme o IP/nome do servidor | Validar configuração, Host e Origin no ambiente de destino |
+| 4.5 | Planejar HTTPS para acesso autenticado, inclusive na rede interna, e revisar a implantação do servidor HTTP | Proteger senhas e sessões em trânsito; não expor diretamente o servidor HTTP embutido à internet |
+| 4.6 | Conta técnica dedicada, sem privilégios de administrador; permissões mínimas e logs com rotação | Separar acesso ao código, dados, configuração e backups |
+| 4.7 | Validar monitoramento de saúde, inicialização e compatibilidade do runtime com a versão escolhida do Windows Server | Testar no servidor de destino antes de liberar para uso |
 
-## Fase 5 — Integração com o ERP Dataplace Symphony (pausada)
+## Fase 5 — Integração com o ERP Dataplace Symphony (em andamento)
 
 Objetivo: sincronizar produtos, preços, estoque, clientes, pedidos de faturamento
 e ordens de serviço. `dataplace_connector.py` e `offline_sync.py` já existem como
 base. Decisões pendentes: método de acesso (HUB / Data Exchange / API), formato
-dos arquivos, frequência e conta técnica. Enquanto isso, `tools/gerar_products.py`
-e `tools/gerar_ean_map.py` atualizam preços a partir de CSV exportado do ERP.
+dos arquivos, frequência e conta técnica.
+
+Progresso em 14/09/2026:
+- Implementado `tools/import_preview.py`: módulo de prévia de importação.
+- Valida formato, conteúdo e compara com arquivos atuais (products.js, ean_map.js).
+- Gera relatório JSON com erros, avisos e diferenças (novo, igual, alterado, ausente).
+- Não grava nos arquivos de produção.
+- Testado com arquivos válidos e inválidos.
+- Documentado em `tools/README_IMPORT_PREVIEW.md`.
+
+Enquanto isso, `tools/gerar_products.py` e `tools/gerar_ean_map.py` atualizam preços
+a partir de CSV exportado do ERP.
 
 ## Fluxo de trabalho recomendado
 
-1. Toda alteração é feita na pasta com Git e registrada com commit.
-2. `verificar.bat` antes de qualquer entrega.
-3. Entrega = ZIP em `02_Distribuicao` (excluir `.git`, `__pycache__`, `_descartados`).
-4. A versão em produção nunca é editada diretamente; se algo falhar, volta-se à
-   versão anterior pelo Git ou pelo ZIP anterior.
+1. Preservar uma cópia executável da 5.9.14 e um backup separado dos dados.
+   Git não guarda os dados ignorados e não substitui backup.
+2. Refatorar uma responsabilidade por vez em cópia separada com Git.
+3. Rodar `verificar.bat` e validar navegador, persistência e terminais Gertec
+   após cada etapa. Usar dados de laboratório separados dos dados de produção.
+4. Gerar pacote de entrega sem dados reais, credenciais, `.git`, `__pycache__`
+   ou `_descartados`. Revisar o conteúdo do ZIP; `.gitignore` não filtra ZIPs.
+5. Antes da implantação, testar instalação, reinício, backup e restauração no
+   Windows Server. Definir uma janela de migração e impedir gravações durante
+   a transferência final dos dados.
+6. Migrar os dados apenas por procedimento explícito de backup/restauração,
+   ajustar os terminais Gertec para o servidor e validar os fluxos principais.
+7. Manter pacote anterior e backup compatível para retorno. Reverter código
+   não reverte alterações de dados; documentar e testar ambos os procedimentos.

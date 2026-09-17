@@ -1,8 +1,27 @@
-# Preparação para nuvem — SEG Vendas 5.9.13
+# Preparação para nuvem — SEG Vendas 5.9.14
 
-## Opção indicada para o projeto principal
+## Plataformas suportadas
 
-Para uma implantação online, a opção mais simples é um Web Service Docker no Render com plano pago inicial e disco persistente montado em `/app/data`. O `render.yaml` deste repositório já descreve essa estrutura.
+### Azure Container Apps (Recomendado)
+
+Para demonstrar que o sistema é seguro e rápido para outras lojas, a opção recomendada é **Azure Container Apps**.
+
+Documentação completa:
+- [README_AZURE.md](README_AZURE.md) - Guia completo de deployment
+- [azure-container-apps.yaml](azure-container-apps.yaml) - Configuração declarativa
+- [deploy_azure.ps1](deploy_azure.ps1) - Script de automação PowerShell
+
+Vantagens do Azure:
+- Escalabilidade automática
+- Armazenamento persistente integrado (Azure Files)
+- HTTPS automático
+- Monitoramento avançado (Azure Monitor)
+- Integração com ecossistema Microsoft
+- Suporte profissional e SLA
+
+### Render (Alternativa)
+
+Para uma implantação alternativa, o Render é uma opção mais simples.
 
 O disco é necessário porque o aplicativo grava usuários, clientes importados, históricos, fotos e auditorias em arquivos locais. Sem um disco persistente, esses arquivos seriam perdidos quando o serviço reiniciasse ou fosse publicado novamente.
 

@@ -1,0 +1,335 @@
+SEG VENDAS — ROTEIRO DE INTEGRAÇÃO DATAPLACE, AZURE E LOJAS
+================================================================
+
+OBJETIVO
+--------
+Manter cada loja funcionando de forma independente, inclusive quando a internet,
+o Azure ou o Dataplace estiverem indisponíveis. Quando os serviços retornarem, o
+SEG Vendas deverá sincronizar automaticamente as informações pendentes.
+
+O Gertec continuará funcionando somente na rede local de cada loja e consultará
+a última versão válida do catálogo armazenada no servidor local.
+
+
+ARQUITETURA DEFINIDA
+--------------------
+
+                    DATAPLACE CLOUD
+              Fonte oficial das informações
+                           |
+                           v
+                 INTEGRADOR NO AZURE
+             Validação, versões e distribuição
+                           |
+           +---------------+---------------+
+           |               |               |
+           v               v               v
+        LOJA A          LOJA B          LOJA C
+    SEG + base local  SEG + base local  SEG + base local
+    Gertec local      Gertec local      Gertec local
+
+
+FONTE OFICIAL DE CADA INFORMAÇÃO
+--------------------------------
+
+Produtos e descrições:       Dataplace
+Preços:                       Dataplace
+EAN/códigos de barras:        Dataplace
+Estoque por filial:           Dataplace
+Clientes:                     Dataplace
+Manuais de produtos:          Dataplace, respeitando a autorização de distribuição
+Orçamentos e pedidos:         Loja de origem, enviados para a central
+Configuração de rede/Gertec:  Exclusiva de cada loja; nunca sincronizar globalmente
+Senhas e sessões:             Não tratar como cadastro comum de funcionários
+Funcionários:                 Definir com a administração antes da automação
+
+O SEG Vendas não deverá alterar nem sobrescrever preços e estoque oficiais.
+
+
+CONCEITOS QUE NÃO PODEM SER CONFUNDIDOS
+---------------------------------------
+
+1. CÓPIA LOCAL OPERACIONAL
+   Dados utilizados diariamente pelo SEG e pelo Gertec quando não há conexão.
+
+2. SINCRONIZAÇÃO
+   Troca controlada de versões e eventos entre lojas, Azure e Dataplace.
+
+3. BACKUP
+   Cópia histórica usada para recuperar dados apagados ou corrompidos.
+
+Sincronização não substitui backup. Um erro também pode ser sincronizado; por
+isso, devem existir versões anteriores e testes periódicos de restauração.
+
+
+ETAPA 1 — PRESERVAR A BASE ESTÁVEL
+---------------------------------
+
+[ ] Manter a versão 5.9.14 funcionando no laboratório.
+[ ] Manter uma cópia separada da versão 5.9.13.
+[ ] Fazer novos trabalhos em cópia/versão separada, por exemplo 5.9.15.
+[ ] Fazer backup independente dos dados; Git não guarda dados ignorados.
+[ ] Não usar dados reais de produção em testes de nuvem.
+
+CRITÉRIO DE APROVAÇÃO:
+A versão estável inicia, funciona e pode ser recuperada sem depender da versão
+em desenvolvimento.
+
+
+ETAPA 2 — IMPORTAÇÃO CONTROLADA DO DATAPLACE
+--------------------------------------------
+
+Começar com arquivos exportados pelo Dataplace. Não cadastrar milhares de
+produtos manualmente e não começar pelo BOT.
+
+Implementar importação para:
+
+[ ] Produtos e descrições.
+[ ] Preços.
+[ ] EAN/códigos de barras.
+[ ] Estoque separado por filial/unidade.
+[ ] Clientes.
+[ ] Referências e arquivos dos manuais.
+[ ] Funcionários, somente depois de definir autoridade, desligamentos, contas e
+    permissões.
+
+Cada importação deverá:
+
+[ ] Identificar a origem e a data/hora.
+[ ] Validar colunas obrigatórias e formato.
+[ ] Rejeitar códigos inválidos e duplicados.
+[ ] Exibir prévia: inclusões, alterações, registros ignorados e erros.
+[ ] Não apagar registros apenas porque não vieram em um relatório.
+[ ] Gerar backup antes da aplicação.
+[ ] Aplicar a atualização de forma atômica: completa ou nenhuma alteração.
+[ ] Manter a versão anterior para retorno.
+[ ] Registrar auditoria da operação.
+
+CRITÉRIO DE APROVAÇÃO:
+Arquivos válidos são importados corretamente; arquivos incompletos ou inválidos
+são rejeitados sem danificar o catálogo atual.
+
+
+ETAPA 3 — CACHE LOCAL VERSIONADO
+--------------------------------
+
+[ ] Separar os dados da pasta do programa.
+[ ] Criar diretório diferente para laboratório e produção.
+[ ] Registrar versão, origem e data de cada conjunto de dados.
+[ ] Preservar a última versão válida.
+[ ] Manter pelo menos uma versão anterior recuperável.
+[ ] Atualizar dados por transação/substituição atômica.
+[ ] Exibir no SEG a última sincronização de cada categoria.
+[ ] Avisar claramente quando os dados estiverem desatualizados.
+[ ] Guardar operações pendentes em fila até a conexão retornar.
+
+Sugestão de exibição:
+
+Produtos e preços: atualizados em 11/09/2026 às 14:35
+Estoque: atualizado em 11/09/2026 às 14:20
+Dataplace indisponível — utilizando a última cópia válida
+
+CRITÉRIO DE APROVAÇÃO:
+SEG, busca de produtos e Gertec continuam funcionando com internet, Azure e
+Dataplace desligados.
+
+
+ETAPA 4 — REGRAS DO ESTOQUE
+---------------------------
+
+O estoque deverá conter, no mínimo:
+
+[ ] Código do produto.
+[ ] Identificador da filial/unidade.
+[ ] Quantidade informada pelo Dataplace.
+[ ] Data e hora da atualização.
+[ ] Versão da sincronização.
+
+Exibir separadamente, se aplicável:
+
+- Estoque físico informado pelo ERP.
+- Quantidade reservada em operações pendentes.
+- Quantidade disponível.
+- Estoque por loja.
+- Horário da última atualização.
+
+O sistema nunca deverá apresentar estoque antigo como garantia de disponibilidade.
+
+CRITÉRIO DE APROVAÇÃO:
+O vendedor identifica a loja, quantidade, origem e horário do estoque exibido.
+
+
+ETAPA 5 — MANUAIS DE PRODUTOS
+-----------------------------
+
+[ ] Confirmar autorização para armazenar e distribuir os manuais.
+[ ] Registrar versão ou hash de cada arquivo.
+[ ] Baixar para o Azure somente arquivos validados.
+[ ] Manter cópia local dos manuais necessários para operação offline.
+[ ] Definir se todos serão baixados ou somente os utilizados.
+[ ] Não substituir manual válido por arquivo vazio ou incompleto.
+
+CRITÉRIO DE APROVAÇÃO:
+Os manuais necessários abrem localmente mesmo sem internet.
+
+
+ETAPA 6 — INTEGRADOR CENTRAL NO AZURE
+------------------------------------
+
+O Azure será um hub de sincronização, auditoria e proteção. Não será necessário
+para cada consulta local do SEG ou do Gertec.
+
+[ ] Escolher o serviço Azure adequado após prova de conceito.
+[ ] Usar HTTPS em todas as comunicações externas.
+[ ] Guardar segredos no serviço seguro do Azure, nunca no código ou Git.
+[ ] Identificar cada loja com ID e credencial exclusivos.
+[ ] Validar assinatura e impedir repetição de requisições.
+[ ] Criar versões do catálogo antes de distribuir.
+[ ] Registrar quais versões cada loja recebeu e aplicou.
+[ ] Usar armazenamento e banco persistentes.
+[ ] Configurar logs, monitoramento, alertas e retenção.
+[ ] Restringir acessos administrativos.
+[ ] Atender às exigências da LGPD para clientes e funcionários.
+
+CRITÉRIO DE APROVAÇÃO:
+Uma loja envia e recebe atualizações sem duplicidade e sem acessar os segredos
+de outra loja.
+
+
+ETAPA 7 — COMPORTAMENTO DURANTE FALHAS
+--------------------------------------
+
+Testar obrigatoriamente:
+
+[ ] Dataplace indisponível.
+[ ] Azure indisponível.
+[ ] Internet de uma loja indisponível.
+[ ] Servidor local reiniciado inesperadamente.
+[ ] Arquivo incompleto ou com formato alterado.
+[ ] Download interrompido.
+[ ] Duas versões recebidas fora de ordem.
+[ ] Evento enviado duas vezes.
+[ ] Retorno da conexão após várias horas.
+[ ] Disco local cheio.
+[ ] Restauração de uma versão anterior.
+
+Com Dataplace ou Azure fora do ar:
+
+- Não apagar nem zerar dados locais.
+- Continuar utilizando a última versão válida.
+- Continuar atendendo no SEG e Gertec local.
+- Manter eventos pendentes na fila.
+- Informar a última data de sincronização.
+- Tentar novamente com intervalos controlados.
+
+CRITÉRIO DE APROVAÇÃO:
+Nenhuma falha externa interrompe a operação local ou destrói dados válidos.
+
+
+ETAPA 8 — BACKUP E RESTAURAÇÃO
+------------------------------
+
+Manter três camadas:
+
+[ ] Cópia operacional local.
+[ ] Histórico local com versões anteriores e fila pendente.
+[ ] Backup externo criptografado, com retenção e proteção contra exclusão.
+
+Incluir no backup:
+
+[ ] Produtos, preços e EAN.
+[ ] Estoque por filial.
+[ ] Clientes e funcionários autorizados.
+[ ] Usuários e permissões, de forma protegida.
+[ ] Orçamentos, pedidos e filas pendentes.
+[ ] Manuais e fotos necessários.
+[ ] Configurações permitidas.
+[ ] Banco SQLite e demais arquivos de dados.
+
+[ ] Criar procedimento escrito de restauração.
+[ ] Testar a restauração em ambiente separado.
+[ ] Registrar data, resultado e responsável pelo teste.
+
+CRITÉRIO DE APROVAÇÃO:
+Um ambiente novo é recuperado a partir do backup e passa nos testes principais.
+
+
+ETAPA 9 — AUTOMATIZAÇÃO DA COLETA
+---------------------------------
+
+Ordem de preferência:
+
+1. API/HUB/Data Exchange oficial do Dataplace.
+2. Exportação automática fornecida pelo Dataplace.
+3. BOT autorizado para acessar a interface e exportar relatórios.
+
+O BOT não deverá aplicar dados diretamente. Ele apenas obterá o arquivo e o
+entregará ao mesmo validador criado na Etapa 2.
+
+[ ] Definir conta técnica sem privilégios desnecessários.
+[ ] Não armazenar senha no código ou no repositório.
+[ ] Detectar mudanças no formato do relatório.
+[ ] Rejeitar resultados vazios ou incompletos.
+[ ] Alertar quando a coleta falhar.
+[ ] Manter importação manual como contingência.
+
+CRITÉRIO DE APROVAÇÃO:
+Se o BOT parar, a operação continua e a importação manual permanece disponível.
+
+
+ETAPA 10 — PILOTO CONTROLADO
+----------------------------
+
+[ ] Usar laboratório e dados fictícios ou anonimizados.
+[ ] Simular pelo menos duas lojas com IDs e portas diferentes.
+[ ] Sincronizar produtos, preços e estoque entre elas.
+[ ] Confirmar que o Gertec consulta apenas o servidor local.
+[ ] Desligar internet e repetir consultas e operações.
+[ ] Restaurar conexão e confirmar reenvio sem duplicidade.
+[ ] Conferir logs, versões e auditoria.
+[ ] Avaliar custo, desempenho e manutenção do Azure.
+[ ] Obter aprovação do programador responsável.
+
+CRITÉRIO DE APROVAÇÃO:
+O piloto funciona conectado e desconectado, sem perda, duplicação ou mistura de
+dados entre as lojas.
+
+
+ETAPA 11 — ENTRADA EM PRODUÇÃO
+------------------------------
+
+[ ] Preservar versão e backup anteriores.
+[ ] Definir janela de migração.
+[ ] Impedir novas gravações durante a transferência final dos dados.
+[ ] Verificar conteúdo do pacote; não incluir dados ou credenciais indevidos.
+[ ] Configurar cada loja individualmente.
+[ ] Confirmar IP local e porta TCP 6500 dos terminais Gertec.
+[ ] Validar login, catálogo, preço, estoque, cliente, orçamento e Gertec.
+[ ] Monitorar de perto a primeira sincronização.
+[ ] Ter procedimento de retorno de código e dados.
+
+IMPORTANTE:
+Reverter o código não reverte automaticamente alterações nos dados. Os dois
+procedimentos precisam estar documentados e testados.
+
+
+ORDEM OBRIGATÓRIA RESUMIDA
+--------------------------
+
+1. Preservar a versão estável e os dados.
+2. Criar importação controlada do Dataplace.
+3. Implementar cache local versionado e funcionamento offline.
+4. Definir corretamente estoque, clientes, funcionários e manuais.
+5. Implementar e testar backup/restauração.
+6. Construir o hub central no Azure.
+7. Testar falhas deliberadamente.
+8. Automatizar a coleta por interface oficial ou BOT.
+9. Executar piloto com dados não produtivos.
+10. Entrar em produção somente após aprovação técnica.
+
+
+REGRA PRINCIPAL
+---------------
+Nunca substituir uma versão local válida por dados vazios, incompletos,
+inválidos ou mais antigos. Na dúvida, conservar os dados atuais, registrar o
+erro e alertar o responsável.
