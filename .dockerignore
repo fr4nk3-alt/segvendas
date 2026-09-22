@@ -1,0 +1,12 @@
+.git
+.github
+_descartados
+data
+*.zip
+*.log
+__pycache__
+*.pyc
+runtime
+tools/test_*
+tools/preview*.json
+.coverage
