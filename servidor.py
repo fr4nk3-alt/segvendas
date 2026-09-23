@@ -879,39 +879,141 @@ def record_quote_replication(quote_entry: dict) -> dict:
     return {"enabled": bool(config.enabled or supabase.enabled), "queued": True, **result}
 
 
+def enqueue_store_event(entity: str, operation: str, payload: object, dedupe_key: str) -> dict:
+    """Enfileira um evento de replicação quando hub ou Supabase estiverem configurados."""
+    config = StoreReplicationConfig.from_env()
+    supabase = SupabaseConfig.from_env_or_file(DATA_DIR)
+    if not config.enabled and not supabase.enabled:
+        return {"enabled": False, "queued": False}
+    event_id = f"{config.store_id}:{entity}:{safe_text(dedupe_key, 100)}:{safe_text(now_iso(), 60)}"
+    result = STORE_REPLICA.enqueue(entity, operation, payload, event_id=event_id)
+    return {"enabled": True, "queued": True, **result}
+
+
+def _apply_remote_quote(payload: dict, origin_store: str) -> bool:
+    if not isinstance(payload, dict):
+        return False
+    quote = dict(payload)
+    quote["replicaOriginStore"] = origin_store
+    quote_id = safe_text(quote.get("id"), 100)
+    if not quote_id:
+        return False
+    with DB_LOCK:
+        records = read_json_file(QUOTE_HISTORY_DB, [])
+        if not isinstance(records, list):
+            records = []
+        index = next((i for i, item in enumerate(records) if isinstance(item, dict) and safe_text(item.get("id"), 100) == quote_id and safe_text(item.get("replicaOriginStore"), 80) == origin_store), -1)
+        if index >= 0:
+            current_stamp = safe_text(records[index].get("updatedAt") or records[index].get("serverSavedAt"), 60)
+            incoming_stamp = safe_text(quote.get("updatedAt") or quote.get("serverSavedAt"), 60)
+            if incoming_stamp >= current_stamp:
+                records[index] = quote
+        else:
+            records.insert(0, quote)
+        write_json_file(QUOTE_HISTORY_DB, records)
+    return True
+
+
+def _apply_remote_clients(payload: dict) -> bool:
+    incoming = payload.get("clients") if isinstance(payload, dict) else None
+    if not isinstance(incoming, list):
+        return False
+    with DB_LOCK:
+        clients = read_json_file(CLIENTS_DB, [])
+        if not isinstance(clients, list):
+            clients = []
+        by_code = {safe_text(item.get("code"), 80): item for item in clients if safe_text(item.get("code"), 80)}
+        by_document = {re.sub(r"\D", "", safe_text(item.get("document"), 40)): item for item in clients if re.sub(r"\D", "", safe_text(item.get("document"), 40))}
+        for remote in incoming:
+            if not isinstance(remote, dict):
+                continue
+            previous = by_code.get(safe_text(remote.get("code"), 80)) or by_document.get(re.sub(r"\D", "", safe_text(remote.get("document"), 40)))
+            merged = dict(remote)
+            if previous:
+                for field in ("blocked", "blockedAt", "blockedBy"):
+                    if previous.get(field):
+                        merged[field] = previous.get(field)
+                clients[clients.index(previous)] = merged
+            else:
+                clients.append(merged)
+                if safe_text(remote.get("code"), 80):
+                    by_code[safe_text(remote.get("code"), 80)] = merged
+        write_json_file(CLIENTS_DB, clients)
+    return True
+
+
+def _apply_remote_keyed_record(db_path: Path, payload: dict) -> bool:
+    code = safe_text(payload.get("code"), 100)
+    entry = payload.get("entry")
+    if not code or not isinstance(entry, dict):
+        return False
+    with DB_LOCK:
+        records = read_json_file(db_path, {})
+        if not isinstance(records, dict):
+            records = {}
+        current = records.get(code) if isinstance(records.get(code), dict) else {}
+        if current and safe_text(entry.get("updatedAt"), 60) < safe_text(current.get("updatedAt"), 60):
+            return False
+        records[code] = entry
+        write_json_file(db_path, records)
+    return True
+
+
+def _apply_remote_categories(payload: dict) -> bool:
+    if not isinstance(payload, dict):
+        return False
+    remote_categories = payload.get("categories") if isinstance(payload.get("categories"), list) else []
+    remote_overrides = payload.get("overrides") if isinstance(payload.get("overrides"), dict) else {}
+    with DB_LOCK:
+        records = read_json_file(PRODUCT_CATEGORIES_DB, {})
+        if not isinstance(records, dict):
+            records = {}
+        saved = records.get("categories") if isinstance(records.get("categories"), list) else []
+        overrides = records.get("overrides") if isinstance(records.get("overrides"), dict) else {}
+        known = {safe_text(item, 80).casefold() for item in saved}
+        for category in remote_categories:
+            name = safe_text(category, 80)
+            if name and name.casefold() not in known:
+                saved.append(name)
+                known.add(name.casefold())
+        for code, entry in remote_overrides.items():
+            if not isinstance(entry, dict):
+                continue
+            current = overrides.get(code) if isinstance(overrides.get(code), dict) else {}
+            if not current or safe_text(entry.get("updatedAt"), 60) >= safe_text(current.get("updatedAt"), 60):
+                overrides[safe_text(code, 100)] = entry
+        records["categories"] = saved
+        records["overrides"] = overrides
+        write_json_file(PRODUCT_CATEGORIES_DB, records)
+    return True
+
+
 def apply_incoming_replication_events() -> dict:
-    """Aplica apenas vendas append/update; usuários e segredos nunca entram na réplica."""
+    """Aplica eventos replicados; usuários e segredos nunca entram na réplica."""
     events = STORE_REPLICA.unapplied_events(200)
     applied = 0
     ignored = 0
     local_store_id = StoreReplicationConfig.from_env().store_id
+    handlers = {
+        "quote": _apply_remote_quote,
+        "clients": lambda payload, origin: _apply_remote_clients(payload),
+        "product_description": lambda payload, origin: _apply_remote_keyed_record(PRODUCT_DESCRIPTIONS_DB, payload),
+        "product_status": lambda payload, origin: _apply_remote_keyed_record(PRODUCT_STATUSES_DB, payload),
+        "product_categories": lambda payload, origin: _apply_remote_categories(payload),
+    }
     for event in events:
-        if safe_text(event.get("storeId"), 80) == local_store_id:
+        origin = safe_text(event.get("storeId"), 80)
+        if origin == local_store_id:
             ignored += 1
             continue
-        if event.get("entity") != "quote" or event.get("operation") != "upsert" or not isinstance(event.get("payload"), dict):
+        handler = handlers.get(safe_text(event.get("entity"), 60))
+        if not handler or event.get("operation") != "upsert" or not isinstance(event.get("payload"), dict):
             ignored += 1
             continue
-        quote = dict(event["payload"])
-        quote["replicaOriginStore"] = safe_text(event.get("storeId"), 80)
-        quote_id = safe_text(quote.get("id"), 100)
-        if not quote_id:
+        if handler(event["payload"], origin):
+            applied += 1
+        else:
             ignored += 1
-            continue
-        with DB_LOCK:
-            records = read_json_file(QUOTE_HISTORY_DB, [])
-            if not isinstance(records, list):
-                records = []
-            index = next((i for i, item in enumerate(records) if isinstance(item, dict) and safe_text(item.get("id"), 100) == quote_id and safe_text(item.get("replicaOriginStore"), 80) == quote["replicaOriginStore"]), -1)
-            if index >= 0:
-                current_stamp = safe_text(records[index].get("updatedAt") or records[index].get("serverSavedAt"), 60)
-                incoming_stamp = safe_text(quote.get("updatedAt") or quote.get("serverSavedAt"), 60)
-                if incoming_stamp >= current_stamp:
-                    records[index] = quote
-            else:
-                records.insert(0, quote)
-            write_json_file(QUOTE_HISTORY_DB, records)
-        applied += 1
     STORE_REPLICA.mark_events_applied([event["eventId"] for event in events])
     return {"received": len(events), "applied": applied, "ignored": ignored}
 
@@ -2868,7 +2970,7 @@ class AppHandler(SimpleHTTPRequestHandler):
                 for event in events:
                     if not isinstance(event, dict) or not safe_text(event.get("eventId"), 160):
                         continue
-                    if safe_text(event.get("entity"), 80) not in {"quote"}:
+                    if safe_text(event.get("entity"), 80) not in {"quote", "clients", "product_description", "product_status", "product_categories"}:
                         continue
                     clean_events.append({
                         "eventId": safe_text(event.get("eventId"), 160),
@@ -3133,6 +3235,7 @@ class AppHandler(SimpleHTTPRequestHandler):
                 backup_file(CLIENTS_DB)
                 CLIENTS_CSV.write_bytes(raw)
                 write_json_file(CLIENTS_DB, clients)
+                enqueue_store_event("clients", "upsert", {"clients": clients}, f"import-{now_iso()}")
                 append_audit(CLIENT_IMPORT_AUDIT_DB, {"action": "Importação de clientes", "actor": user["name"], "store": user.get("store", ""), "fileName": file_name, "count": len(clients), "details": metadata})
                 self.send_json(200, {"ok": True, "count": len(clients), "preservedBlocks": preserved_blocks, "metadata": metadata})
             except ValueError as exc:
@@ -3177,6 +3280,7 @@ class AppHandler(SimpleHTTPRequestHandler):
             client["blockedAt"] = now_iso() if client["blocked"] else ""
             client["blockedBy"] = user.get("name", "") if client["blocked"] else ""
             write_json_file(CLIENTS_DB, clients)
+            enqueue_store_event("clients", "upsert", {"clients": [client]}, f"block-{client_id}")
             self.send_json(200, {"ok": True, "client": client})
             return
         if path == "/api/product-descriptions":
@@ -3220,6 +3324,7 @@ class AppHandler(SimpleHTTPRequestHandler):
                     }
                     records[code] = entry
                     write_json_file(PRODUCT_DESCRIPTIONS_DB, records)
+                enqueue_store_event("product_description", "upsert", {"code": code, "entry": entry}, code)
                 append_audit(PRODUCT_DESCRIPTION_AUDIT_DB, {
                     "action": "Edição" if previous else "Cadastro",
                     "code": code,
@@ -3262,6 +3367,7 @@ class AppHandler(SimpleHTTPRequestHandler):
                     }
                     records[code] = entry
                     write_json_file(PRODUCT_STATUSES_DB, records)
+                enqueue_store_event("product_status", "upsert", {"code": code, "entry": entry}, code)
                 append_audit(PRODUCT_STATUS_AUDIT_DB, {
                     "action": "Reativação" if active else "Inativação",
                     "code": code,
@@ -3315,6 +3421,7 @@ class AppHandler(SimpleHTTPRequestHandler):
                     else:
                         raise ValueError("Ação de categoria inválida.")
                     write_json_file(PRODUCT_CATEGORIES_DB, records)
+                enqueue_store_event("product_categories", "upsert", records, f"categories-{now_iso()}")
                 append_audit(PRODUCT_CATEGORY_AUDIT_DB, {
                     **result,
                     "actor": user.get("name", ""),
