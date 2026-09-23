@@ -3609,6 +3609,12 @@ class AppHandler(SimpleHTTPRequestHandler):
 
 
 def main() -> None:
+    if cloud_runtime_enabled():
+        try:
+            from s3_persist import start_persistence
+            start_persistence(DATA_DIR, BACKUP_DIR, StoreReplicationConfig.from_env().store_id)
+        except Exception as exc:
+            print(f"[S3] Persistência em nuvem desativada: {exc}")
     ensure_full_client_base()
     ensure_default_users()
     sync_users_from_employee_csv()
