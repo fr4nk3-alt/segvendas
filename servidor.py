@@ -51,7 +51,7 @@ from supabase_connector import (
 
 ROOT = Path(__file__).resolve().parent
 APP_VERSION = "5.9.14"
-DATA_DIR = ROOT / "data"
+DATA_DIR = Path(os.environ.get("SEG_DATA_DIR") or (ROOT / "data"))
 MANUALS_DIR = ROOT / "manuais"
 PHOTOS_DIR = DATA_DIR / "fotos_produtos"
 PROFILE_PHOTOS_DIR = DATA_DIR / "fotos_perfil"
